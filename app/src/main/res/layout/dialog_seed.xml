@@ -40,20 +40,25 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="end">
+        android:gravity="end"
+        style="?android:attr/buttonBarStyle">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/seed_dialog_cancel"
             android:textSize="@dimen/small_text_size"
-            android:id="@+id/cancelStartGameFromSeedButton" />
+            android:id="@+id/cancelStartGameFromSeedButton"
+            style="?android:attr/buttonBarButtonStyle" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/seed_dialog_start"
             android:textSize="@dimen/small_text_size"
-            android:id="@+id/startGameFromSeedButton" />
+            android:id="@+id/startGameFromSeedButton"
+            style="?android:attr/buttonBarButtonStyle" />
+
     </LinearLayout>
 
 </LinearLayout>

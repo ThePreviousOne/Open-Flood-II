@@ -45,33 +45,36 @@
         android:textSize="@dimen/small_text_size"
         android:layout_gravity="left"
         android:layout_marginBottom="@dimen/box_margins" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seedTextView"
+        android:textSize="@dimen/small_text_size"
+        android:layout_gravity="start" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="end">
+        android:gravity="end"
+        style="?android:attr/buttonBarStyle">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/endgame_replay"
             android:textSize="@dimen/small_text_size"
-            android:id="@+id/replayButton" />
+            android:id="@+id/replayButton"
+            style="?android:attr/buttonBarButtonStyle" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/endgame_new_game_button"
             android:textSize="@dimen/small_text_size"
-            android:id="@+id/newGameButton" />
-    </LinearLayout>
+            android:id="@+id/newGameButton"
+            style="?android:attr/buttonBarButtonStyle" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/seedTextView"
-        android:textSize="@dimen/small_text_size"
-        android:layout_gravity="end" />
+    </LinearLayout>
 
 </LinearLayout>
