@@ -96,7 +96,7 @@ public class GameActivity extends AppCompatActivity
         // Get the steps text view
         stepsTextView = (TextView) findViewById(R.id.stepsTextView);
 
-        if (sp.contains("state_saved")) {
+        if (sp.contains("state_saved") && !sp.getBoolean("state_finished", false)) {
             // Restore previous game
             restoreGame();
         } else {
@@ -113,6 +113,12 @@ public class GameActivity extends AppCompatActivity
         spEditor.putString("state_board", new Gson().toJson(game.getBoard()));
         spEditor.putInt("state_steps", game.getSteps());
         spEditor.putString("state_seed", game.getSeed());
+        spEditor.apply();
+    }
+
+    private void setGameFinished(boolean state) {
+        gameFinished = state;
+        spEditor.putBoolean("state_finished", state);
         spEditor.apply();
     }
 
@@ -151,7 +157,7 @@ public class GameActivity extends AppCompatActivity
     }
 
     private void initGame() {
-        gameFinished = false;
+        setGameFinished(false);
         lastColor = game.getColor(0, 0);
 
         layoutColorButtons();
@@ -241,7 +247,7 @@ public class GameActivity extends AppCompatActivity
         stepsTextView.setText(game.getSteps() + " / " + game.getMaxSteps());
 
         if (game.checkWin() || game.getSteps() == game.getMaxSteps()) {
-            gameFinished = true;
+            setGameFinished(true);
             showEndGameDialog();
         }
 
