@@ -52,23 +52,22 @@ public class GameActivity extends AppCompatActivity
         spEditor = sp.edit();
 
         // Get the FloodView
-        floodView = (FloodView) findViewById(R.id.floodView);
+        floodView = findViewById(R.id.floodView);
 
         // Initialize the paints array and pass it to the FloodView
         initPaints();
         floodView.setPaints(paints);
 
-        ImageView settingsButton = (ImageView) findViewById(R.id.settingsButton);
+        ImageView settingsButton = findViewById(R.id.settingsButton);
         settingsButton.setOnClickListener(new View.OnClickListener() {
                                               @Override
                                               public void onClick(View v) {
               Intent launchSettingsIntent = new Intent(GameActivity.this, SettingsActivity.class);
               startActivityForResult(launchSettingsIntent, UPDATE_SETTINGS);
-          }
-      }
-        );
+              }
+        });
 
-        ImageView infoButton = (ImageView) findViewById(R.id.infoButton);
+        ImageView infoButton = findViewById(R.id.infoButton);
         infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +76,7 @@ public class GameActivity extends AppCompatActivity
             }
         });
 
-        ImageView newGameButton = (ImageView) findViewById(R.id.newGameButton);
+        ImageView newGameButton = findViewById(R.id.newGameButton);
         newGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +93,7 @@ public class GameActivity extends AppCompatActivity
         });
 
         // Get the steps text view
-        stepsTextView = (TextView) findViewById(R.id.stepsTextView);
+        stepsTextView = findViewById(R.id.stepsTextView);
 
         if (sp.contains("state_saved") && !sp.getBoolean("state_finished", false)) {
             // Restore previous game
@@ -153,7 +152,6 @@ public class GameActivity extends AppCompatActivity
             paints[i] = new Paint();
             paints[i].setColor(colors[i]);
         }
-        return;
     }
 
     private void initGame() {
@@ -192,7 +190,7 @@ public class GameActivity extends AppCompatActivity
 
     private void layoutColorButtons() {
         // Add color buttons
-        LinearLayout buttonLayout = (LinearLayout) findViewById(R.id.buttonLayout);
+        LinearLayout buttonLayout = findViewById(R.id.buttonLayout);
         buttonLayout.removeAllViews();
         int buttonPadding = (int) getResources().getDimension(R.dimen.color_button_padding);
         for (int i = 0; i < getNumColors(); i++) {
@@ -215,7 +213,6 @@ public class GameActivity extends AppCompatActivity
             newButton.setColor(paints[i].getColor());
             buttonLayout.addView(newButton);
         }
-        return;
     }
 
     @Override
@@ -237,26 +234,21 @@ public class GameActivity extends AppCompatActivity
     }
 
     private void doColor(int color) {
-        if (gameFinished || game.getSteps() >= game.getMaxSteps()) {
-            return;
+        if (!gameFinished && game.getSteps() <= game.getMaxSteps()) {
+            game.flood(color);
+            floodView.drawGame(game);
+            lastColor = color;
+            stepsTextView.setText(game.getSteps() + " / " + game.getMaxSteps());
         }
-
-        game.flood(color);
-        floodView.drawGame(game);
-        lastColor = color;
-        stepsTextView.setText(game.getSteps() + " / " + game.getMaxSteps());
 
         if (game.checkWin() || game.getSteps() == game.getMaxSteps()) {
             setGameFinished(true);
             showEndGameDialog();
         }
-
-        return;
     }
 
     public void onNewGameClick() {
         newGame();
-        return;
     }
 
     public void onReplayClick() {
@@ -266,7 +258,6 @@ public class GameActivity extends AppCompatActivity
     public void onLaunchSeedDialogClick() {
         SeedDialogFragment seedDialogFragment = new SeedDialogFragment();
         seedDialogFragment.show(getSupportFragmentManager(), "SeedDialog");
-        return;
     }
 
     public void onGetSeedClick() {
@@ -275,7 +266,6 @@ public class GameActivity extends AppCompatActivity
         clipboard.setPrimaryClip(clip);
         Toast toast = Toast.makeText(this, getString(R.string.game_seed_copied), Toast.LENGTH_SHORT);
         toast.show();
-        return;
     }
 
     public void onNewGameFromSeedClick(String seed) {
@@ -290,6 +280,5 @@ public class GameActivity extends AppCompatActivity
         args.putString("seed", game.getSeed());
         endGameDialog.setArguments(args);
         endGameDialog.show(getSupportFragmentManager(), "EndGameDialog");
-        return;
     }
 }

@@ -27,7 +27,6 @@ public class ColorButton extends View {
 
     public void setColor(int color) {
         buttonDrawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-        return;
     }
 
     public void setColorBlindText(String text) {

@@ -52,11 +52,11 @@ public class Game {
 
     private String generateRandomSeed() {
         Random rand = new Random(System.currentTimeMillis());
-        String currSeed = "";
+        StringBuilder currSeed = new StringBuilder();
         for(int i=0;i<rand.nextInt((SEED_LENGTH_UPPER-SEED_LENGTH_LOWER)+1)+SEED_LENGTH_LOWER;i++) {
-            currSeed += SEED_CHARS.charAt(rand.nextInt(SEED_CHARS.length()));
+            currSeed.append(SEED_CHARS.charAt(rand.nextInt(SEED_CHARS.length())));
         }
-        return currSeed;
+        return currSeed.toString();
     }
 
     public int[][] getBoard() {
@@ -91,11 +91,10 @@ public class Game {
                 board[y][x] = r.nextInt(numColors);
             }
         }
-        return;
     }
 
     private void initMaxSteps() {
-        maxSteps = (int) 30 * (boardSize * numColors) / (17 * 6);
+        maxSteps = 30 * (boardSize * numColors) / (17 * 6);
     }
 
     public void flood(int replacementColor) {
@@ -133,17 +132,16 @@ public class Game {
             }
         }
         steps++;
-        return;
     }
 
     public boolean checkWin() {
         int lastColor = board[0][0];
-        for (int y = 0; y < board.length; y++) {
+        for (int[] aBoard : board) {
             for (int x = 0; x < board.length; x++) {
-                if (lastColor != board[y][x]) {
+                if (lastColor != aBoard[x]) {
                     return false;
                 }
-                lastColor = board[y][x];
+                lastColor = aBoard[x];
             }
         }
         return true;
@@ -152,16 +150,16 @@ public class Game {
     private class BoardPoint {
         int x, y;
 
-        public BoardPoint(int x, int y) {
+        BoardPoint(int x, int y) {
             this.x = x;
             this.y = y;
         }
 
-        public int getX() {
+        int getX() {
             return x;
         }
 
-        public int getY() {
+        int getY() {
             return y;
         }
 

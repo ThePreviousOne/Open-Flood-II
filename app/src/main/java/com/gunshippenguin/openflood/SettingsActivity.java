@@ -29,7 +29,7 @@ public class SettingsActivity extends AppCompatActivity {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 
         // Set up the board size RadioGroup
-        RadioGroup boardSizeRadioGroup = (RadioGroup) findViewById(R.id.boardSizeRadioGroup);
+        RadioGroup boardSizeRadioGroup = findViewById(R.id.boardSizeRadioGroup);
         boardSizeChoices = getResources().getIntArray(R.array.boardSizeChoices);
         selectedBoardSize = sp.getInt("board_size",
                 getResources().getInteger(R.integer.default_board_size));
@@ -51,7 +51,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         // Set up the num colors RadioGroup
-        RadioGroup numColorsRadioGroup = (RadioGroup) findViewById(R.id.numColorsRadioGroup);
+        RadioGroup numColorsRadioGroup = findViewById(R.id.numColorsRadioGroup);
         numColorsChoices = getResources().getIntArray(R.array.numColorsChoices);
         selectedNumColors = sp.getInt("num_colors",
                 getResources().getInteger(R.integer.default_num_colors));
@@ -59,7 +59,7 @@ public class SettingsActivity extends AppCompatActivity {
             RadioButton currRadioButton = new RadioButton(this);
             currRadioButton.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                     getResources().getDimension(R.dimen.small_text_size));
-            currRadioButton.setText(Integer.toString(nc));
+            currRadioButton.setText(String.valueOf(nc));
             numColorsRadioGroup.addView(currRadioButton);
             if (nc == selectedNumColors) {
                 numColorsRadioGroup.check(currRadioButton.getId());
@@ -73,15 +73,15 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         // Set up the color blind checkbox
-        colorBlindCheckBox = (CheckBox) findViewById(R.id.colorBlindCheckBox);
+        colorBlindCheckBox = findViewById(R.id.colorBlindCheckBox);
         colorBlindCheckBox.setChecked(sp.getBoolean("color_blind_mode", false));
 
         // Set up the old color scheme checkbox
-        oldColorsCheckBox = (CheckBox) findViewById(R.id.oldColorsCheckBox);
+        oldColorsCheckBox = findViewById(R.id.oldColorsCheckBox);
         oldColorsCheckBox.setChecked(sp.getBoolean("use_old_colors", false));
 
         // Set up the clear highscores button
-        Button clearHighScoresButton = (Button) findViewById(R.id.clearHighScoresButton);
+        Button clearHighScoresButton = findViewById(R.id.clearHighScoresButton);
         clearHighScoresButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,7 +91,7 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         // Set up the apply button
-        Button applyButton = (Button) findViewById(R.id.applyButton);
+        Button applyButton = findViewById(R.id.applyButton);
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -21,7 +21,7 @@ public class InfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_info);
 
         // Set up the first line of the info
-        TextView versionTextView = (TextView) findViewById(R.id.infoVersionTextView);
+        TextView versionTextView = findViewById(R.id.infoVersionTextView);
         String appName = getResources().getString(R.string.app_name);
 
         PackageInfo pInfo;
@@ -33,11 +33,11 @@ public class InfoActivity extends AppCompatActivity {
         }
 
         // Set up the source link
-        TextView sourceTextView = (TextView) findViewById(R.id.infoSourceTextView);
+        TextView sourceTextView = findViewById(R.id.infoSourceTextView);
         sourceTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
         // Set up the back button
-        Button backButton = (Button) findViewById(R.id.backButton);
+        Button backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +55,5 @@ public class InfoActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-        return;
     }
 }

@@ -1,11 +1,12 @@
 package com.gunshippenguin.openflood;
 
-import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -22,13 +23,14 @@ import android.preference.PreferenceManager;
 public class EndGameDialogFragment extends DialogFragment {
 
     public interface EndGameDialogFragmentListener {
-        public void onReplayClick();
-        public void onNewGameClick();
-        public void onGetSeedClick();
+        void onReplayClick();
+        void onNewGameClick();
+        void onGetSeedClick();
     }
 
     EndGameDialogFragmentListener listener;
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +48,7 @@ public class EndGameDialogFragment extends DialogFragment {
         dialog.setCanceledOnTouchOutside(false);
 
         // Set up the dialog's title
-        TextView endgameTitleTextView = (TextView) layout.findViewById(R.id.endGameTitle);
+        TextView endgameTitleTextView = layout.findViewById(R.id.endGameTitle);
         if (gameWon) {
             endgameTitleTextView.setText(getString(R.string.endgame_win_title));
         } else {
@@ -54,11 +56,11 @@ public class EndGameDialogFragment extends DialogFragment {
         }
 
         // Set up dialog's other text views
-        TextView endgameTextView = (TextView) layout.findViewById(R.id.endGameText);
-        TextView highScoreTextView = (TextView) layout.findViewById(R.id.highScoreText);
-        ImageView highScoreMedalImageView = (ImageView) layout.findViewById(R.id.highScoreMedalImageView);
+        TextView endgameTextView = layout.findViewById(R.id.endGameText);
+        TextView highScoreTextView = layout.findViewById(R.id.highScoreText);
+        ImageView highScoreMedalImageView = layout.findViewById(R.id.highScoreMedalImageView);
 
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext());
         HighScoreManager highScoreManager = new HighScoreManager(sp);
 
         int boardSize = sp.getInt("board_size", -1);
@@ -72,7 +74,7 @@ public class EndGameDialogFragment extends DialogFragment {
             if (highScoreManager.isHighScore(boardSize, numColors, steps)) {
                 highScoreManager.setHighScore(boardSize, numColors, steps);
                 highScoreTextView.setText(getString(R.string.endgame_new_highscore_text));
-                highScoreTextView.setTypeface(null, Typeface.BOLD);
+                highScoreTextView.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
             } else {
                 highScoreTextView.setText(String.format(getString(R.string.endgame_old_highscore_text),
                         highScoreManager.getHighScore(boardSize, numColors)));
@@ -89,11 +91,10 @@ public class EndGameDialogFragment extends DialogFragment {
                 highScoreTextView.setVisibility(View.GONE);
                 highScoreMedalImageView.setVisibility(View.GONE);
             }
-
         }
 
         // Set up the get seed button
-        TextView seedTextView  = (TextView) layout.findViewById(R.id.seedTextView);
+        TextView seedTextView  = layout.findViewById(R.id.seedTextView);
         seedTextView.setText(String.format(getString(R.string.endgame_seed),
                 getArguments().getString("seed")));
         seedTextView.setTextColor(Color.BLUE);
@@ -105,8 +106,8 @@ public class EndGameDialogFragment extends DialogFragment {
             }
         });
 
-        // Show the replay butotn if the game has been lost
-        Button replayButton = (Button) layout.findViewById(R.id.replayButton);
+        // Show the replay button if the game has been lost
+        Button replayButton = layout.findViewById(R.id.replayButton);
         if (gameWon) {
             replayButton.setVisibility(View.GONE);
         } else {
@@ -120,7 +121,7 @@ public class EndGameDialogFragment extends DialogFragment {
         }
 
         // Set up the new game button callback
-        Button newGameButton = (Button) layout.findViewById(R.id.newGameButton);
+        Button newGameButton = layout.findViewById(R.id.newGameButton);
         newGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,14 +133,13 @@ public class EndGameDialogFragment extends DialogFragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
         try {
-            listener = (EndGameDialogFragmentListener) activity;
+            listener = (EndGameDialogFragmentListener) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
+            throw new ClassCastException(context.toString()
                     + " must implement EndGameDialogListener");
         }
     }
-
 }
