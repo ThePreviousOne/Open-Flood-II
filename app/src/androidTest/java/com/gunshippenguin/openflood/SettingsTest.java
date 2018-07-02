@@ -62,6 +62,11 @@ public class SettingsTest {
 
     @Test
     public void changeNumColorsTest() {
+        // Avoid Crash if total moves left is less than #clickColorButton() actions performed
+        ViewInteraction newGame = onView(
+                allOf(withId(R.id.newGameButton), isDisplayed()));
+        newGame.perform(click());
+
         // Click each of the 6 color buttons that should be initially present
         clickColorButton(0);
         clickColorButton(1);
