@@ -83,13 +83,12 @@ public class EndGameDialogFragment extends DialogFragment {
 
         } else {
             endgameTextView.setVisibility(View.GONE);
+            highScoreMedalImageView.setVisibility(View.GONE);
             if (highScoreManager.highScoreExists(boardSize, numColors)) {
                 highScoreTextView.setText(String.format(getString(R.string.endgame_old_highscore_text),
                         highScoreManager.getHighScore(boardSize, numColors)));
-                highScoreMedalImageView.setVisibility(View.GONE);
             } else {
                 highScoreTextView.setVisibility(View.GONE);
-                highScoreMedalImageView.setVisibility(View.GONE);
             }
         }
 
@@ -108,9 +107,6 @@ public class EndGameDialogFragment extends DialogFragment {
 
         // Show the replay button if the game has been lost
         Button replayButton = layout.findViewById(R.id.replayButton);
-        if (gameWon) {
-            replayButton.setVisibility(View.GONE);
-        } else {
             replayButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -118,7 +114,6 @@ public class EndGameDialogFragment extends DialogFragment {
                     dismiss();
                 }
             });
-        }
 
         // Set up the new game button callback
         Button newGameButton = layout.findViewById(R.id.newGameButton);
