@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
@@ -18,6 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 /**
  * Activity allowing the user to play the actual game.
@@ -31,6 +36,7 @@ public class GameActivity extends AppCompatActivity
     private Game game;
     private SharedPreferences sp;
     private SharedPreferences.Editor spEditor;
+    private Timer timer = new Timer();
 
     private FloodView floodView;
     private TextView stepsTextView;
@@ -94,9 +100,13 @@ public class GameActivity extends AppCompatActivity
 
         // Get the steps text view
         stepsTextView = findViewById(R.id.stepsTextView);
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
         if (sp.contains("state_saved") && !sp.getBoolean("state_finished", false)) {
-            // Restore previous game
+            //Restore the previous game
             restoreGame();
         } else {
             // Set up a new game
@@ -121,7 +131,7 @@ public class GameActivity extends AppCompatActivity
         spEditor.apply();
     }
 
-    private int getBoardSize(){
+    private int getBoardSize() {
         int defaultBoardSize = getResources().getInteger(R.integer.default_board_size);
         if (!sp.contains("board_size")) {
             spEditor.putInt("board_size", defaultBoardSize);
@@ -130,7 +140,7 @@ public class GameActivity extends AppCompatActivity
         return sp.getInt("board_size", defaultBoardSize);
     }
 
-    private int getNumColors(){
+    private int getNumColors() {
         int defaultNumColors = getResources().getInteger(R.integer.default_num_colors);
         if (!sp.contains("num_colors")) {
             spEditor.putInt("num_colors", defaultNumColors);
@@ -243,7 +253,10 @@ public class GameActivity extends AppCompatActivity
 
         if (game.checkWin() || game.getSteps() == game.getMaxSteps()) {
             setGameFinished(true);
-            showEndGameDialog();
+
+            showToast();
+
+            timer.schedule(new DelayTimer(), 3250);
         }
     }
 
@@ -272,6 +285,14 @@ public class GameActivity extends AppCompatActivity
         newGame(seed);
     }
 
+    public void showToast() {
+        if (game.checkWin()) {
+            new Butter( this, R.string.endgame_win_toast).show();
+        } else {
+            new Butter( this, R.string.endgame_lose_toast).show();
+        }
+    }
+
     private void showEndGameDialog() {
         DialogFragment endGameDialog = new EndGameDialogFragment();
         Bundle args = new Bundle();
@@ -281,4 +302,19 @@ public class GameActivity extends AppCompatActivity
         endGameDialog.setArguments(args);
         endGameDialog.show(getSupportFragmentManager(), "EndGameDialog");
     }
+
+    class DelayTimer extends TimerTask {
+
+        @Override
+        public void run() {
+            GameActivity.this.runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    showEndGameDialog();
+                }
+            });
+        }
+    }
+
 }

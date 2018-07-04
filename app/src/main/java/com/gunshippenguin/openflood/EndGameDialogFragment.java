@@ -47,14 +47,6 @@ public class EndGameDialogFragment extends DialogFragment {
         final AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(false);
 
-        // Set up the dialog's title
-        TextView endgameTitleTextView = layout.findViewById(R.id.endGameTitle);
-        if (gameWon) {
-            endgameTitleTextView.setText(getString(R.string.endgame_win_title));
-        } else {
-            endgameTitleTextView.setText(getString(R.string.endgame_lose_title));
-        }
-
         // Set up dialog's other text views
         TextView endgameTextView = layout.findViewById(R.id.endGameText);
         TextView highScoreTextView = layout.findViewById(R.id.highScoreText);
@@ -67,8 +59,7 @@ public class EndGameDialogFragment extends DialogFragment {
         int numColors = sp.getInt("num_colors", -1);
 
         if (gameWon) {
-            String stepsString = String.format(getString(R.string.endgame_win_text),
-                    steps);
+            String stepsString = String.format(getString(R.string.endgame_win_text), steps);
             endgameTextView.setText(stepsString);
 
             if (highScoreManager.isHighScore(boardSize, numColors, steps)) {
@@ -105,15 +96,15 @@ public class EndGameDialogFragment extends DialogFragment {
             }
         });
 
-        // Show the replay button if the game has been lost
+        // Show the replay button
         Button replayButton = layout.findViewById(R.id.replayButton);
-            replayButton.setOnClickListener(new View.OnClickListener() {
+        replayButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onReplayClick();
-                    dismiss();
-                }
-            });
+                listener.onReplayClick();
+                dismiss();
+            }
+        });
 
         // Set up the new game button callback
         Button newGameButton = layout.findViewById(R.id.newGameButton);

@@ -5,11 +5,11 @@
     <string name="game_seed_copied">Zalążek planszy skopiowano do schowka</string>
 
     <!-- End Game Dialog -->
-    <string name="endgame_win_title">Wspaniale</string>
+    <string name="endgame_win_toast">Wspaniale</string>
     <string name="endgame_win_text" formatted="false">Zalałeś planszę w %d ruchach</string>
     <string name="endgame_old_highscore_text" formatted="false">Najlepszy wynik dla planszy tego rodzaju: %d ruchów</string>
     <string name="endgame_new_highscore_text">Nowy najlepszy wynik dla planszy tego rodzaju!</string>
-    <string name="endgame_lose_title">Gra skończona</string>
+    <string name="endgame_lose_toast">Gra skończona</string>
     <string name="endgame_new_game_button">Nowa gra</string>
     <string name="endgame_replay">Zagraj ponownie</string>
     <string name="endgame_seed" fomatted="false">Zalążek: %s (stuknij aby skopiować)</string>

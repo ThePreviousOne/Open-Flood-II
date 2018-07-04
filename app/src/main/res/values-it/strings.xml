@@ -5,11 +5,11 @@
     <string name="game_seed_copied">Seme campo di gioco copiato negli appunti</string>
 
     <!-- End Game Dialog -->
-    <string name="endgame_win_title">Eccellente</string>
+    <string name="endgame_win_toast">Eccellente</string>
     <string name="endgame_win_text" formatted="false">Hai allagato il campo di gioco in %d mosse</string>
     <string name="endgame_old_highscore_text" formatted="false">Record personale per questo tipo di campo: %d mosse</string>
     <string name="endgame_new_highscore_text">Nuovo record personale per questo tipo di campo!</string>
-    <string name="endgame_lose_title">Game Over</string>
+    <string name="endgame_lose_toast">Game Over</string>
     <string name="endgame_new_game_button">Nuova Partita</string>
     <string name="endgame_replay">Replay</string>
     <string name="endgame_seed" fomatted="false">Seme: %s (tocca per copiare)</string>

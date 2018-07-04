@@ -5,11 +5,11 @@
     <string name="game_seed_copied">Seed du tableau copiée dans le presse-papier</string>
 
     <!-- End Game Dialog -->
-    <string name="endgame_win_title">Excellent</string>
+    <string name="endgame_win_toast">Excellent</string>
     <string name="endgame_win_text" formatted="false">Vous avez inondé le tableau en %d coups</string>
     <string name="endgame_old_highscore_text" formatted="false">Record personnel pour ce type de tableau : %d coups</string>
     <string name="endgame_new_highscore_text">Nouveau record personnel pour ce type de tableau !</string>
-    <string name="endgame_lose_title">Fin de partie</string>
+    <string name="endgame_lose_toast">Fin de partie</string>
     <string name="endgame_new_game_button">Nouvelle partie </string>
     <string name="endgame_replay">Rejouer</string>
     <string name="endgame_seed" fomatted="false">Seed : %s (appuyez pour copier)</string>

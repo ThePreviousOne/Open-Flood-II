@@ -5,11 +5,11 @@
     <string name="game_seed_copied">Tabulĝermo kopiita al tondejo</string>
 
     <!-- End Game Dialog -->
-    <string name="endgame_win_title">Bonege</string>
+    <string name="endgame_win_toast">Bonege</string>
     <string name="endgame_win_text" formatted="false">Vi superverŝis la tabulon dum %d movoj</string>
     <string name="endgame_old_highscore_text" formatted="false">Plej bona rezulto por tiu ĉi tabul-speco: %d movoj</string>
     <string name="endgame_new_highscore_text">Nova plej bona rezulto por tiu ĉi tabul-speco!</string>
-    <string name="endgame_lose_title">Ludo finita</string>
+    <string name="endgame_lose_toast">Ludo finita</string>
     <string name="endgame_new_game_button">Nova ludo</string>
     <string name="endgame_replay">Reludi</string>
     <string name="endgame_seed" fomatted="false">Tabulĝermo: %s (frapetu por kopii)</string>

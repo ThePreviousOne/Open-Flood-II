@@ -5,11 +5,11 @@
     <string name="game_seed_copied">A tábla seed-je a vágólapra helyezve</string>
 
     <!-- End Game Dialog -->
-    <string name="endgame_win_title">Kitűnő</string>
+    <string name="endgame_win_toast">Kitűnő</string>
     <string name="endgame_win_text" formatted="false">Elárasztottad a táblát %d lépésben</string>
     <string name="endgame_old_highscore_text" formatted="false">A személyes csúcsod ennél a táblatípusnál: %d lépés</string>
     <string name="endgame_new_highscore_text">Új személyes csúcs ennél a táblatípusnál!</string>
-    <string name="endgame_lose_title">Vesztettél</string>
+    <string name="endgame_lose_toast">Vesztettél</string>
     <string name="endgame_new_game_button">Új játék</string>
     <string name="endgame_replay">Újrajátszás</string>
     <string name="endgame_seed" fomatted="false">Seed: %s (érints a másoláshoz)</string>

@@ -5,11 +5,11 @@
     <string name="game_seed_copied">Saatwert in die Zwischenablage kopiert</string>
 
     <!-- End Game Dialog -->
-    <string name="endgame_win_title">Gut gemacht!</string>
+    <string name="endgame_win_toast">Gut gemacht!</string>
     <string name="endgame_win_text" formatted="false">Sie haben das Spielbrett in %d Zügen gelöst.</string>
     <string name="endgame_old_highscore_text" formatted="false">Persönliche Bestleistung für diesen Bretttyp: %d Züge</string>
     <string name="endgame_new_highscore_text">Neue persönliche Bestleistung für diesen Bretttyp!</string>
-    <string name="endgame_lose_title">Spiel vorbei</string>
+    <string name="endgame_lose_toast">Spiel vorbei</string>
     <string name="endgame_new_game_button">Neues Spiel</string>
     <string name="endgame_replay">Erneut spielen</string>
     <string name="endgame_seed" fomatted="false">Saatwert: %s (zum Kopieren antippen)</string>
