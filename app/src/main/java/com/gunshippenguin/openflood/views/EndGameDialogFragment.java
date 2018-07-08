@@ -1,4 +1,4 @@
-package com.gunshippenguin.openflood;
+package com.gunshippenguin.openflood.views;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -16,6 +16,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
+import com.gunshippenguin.openflood.HighScoreManager;
+import com.gunshippenguin.openflood.R;
 
 /**
  * Dialog Fragment that is displayed to the user upon a win or loss.
@@ -65,7 +68,6 @@ public class EndGameDialogFragment extends DialogFragment {
             if (highScoreManager.isHighScore(boardSize, numColors, steps)) {
                 highScoreManager.setHighScore(boardSize, numColors, steps);
                 highScoreTextView.setText(getString(R.string.endgame_new_highscore_text));
-                highScoreTextView.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
             } else {
                 highScoreTextView.setText(String.format(getString(R.string.endgame_old_highscore_text),
                         highScoreManager.getHighScore(boardSize, numColors)));
@@ -99,8 +101,8 @@ public class EndGameDialogFragment extends DialogFragment {
         // Show the replay button
         Button replayButton = layout.findViewById(R.id.replayButton);
         replayButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
                 listener.onReplayClick();
                 dismiss();
             }

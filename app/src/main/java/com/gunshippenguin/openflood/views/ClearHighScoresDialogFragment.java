@@ -1,4 +1,4 @@
-package com.gunshippenguin.openflood;
+package com.gunshippenguin.openflood.views;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -10,6 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.gunshippenguin.openflood.HighScoreManager;
+import com.gunshippenguin.openflood.R;
+import com.gunshippenguin.openflood.views.Butter;
 
 public class ClearHighScoresDialogFragment extends DialogFragment {
 
@@ -36,10 +40,8 @@ public class ClearHighScoresDialogFragment extends DialogFragment {
                 }
                 dialog.dismiss();
 
-                Toast toast = Toast.makeText(getContext(),
-                        getString(R.string.settings_clear_high_scores_toast),
-                        Toast.LENGTH_SHORT);
-                toast.show();
+                new Butter(getContext(), R.string.settings_clear_high_scores_toast)
+                        .setButteredToastDuration(Toast.LENGTH_LONG).addJam().show();
             }
         });
 

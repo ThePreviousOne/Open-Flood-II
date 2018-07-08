@@ -1,4 +1,4 @@
-package com.gunshippenguin.openflood;
+package com.gunshippenguin.openflood.views;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -13,6 +13,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.gunshippenguin.openflood.R;
 
 /**
  * Dialog allowing the user to enter a seed to start a new game from.

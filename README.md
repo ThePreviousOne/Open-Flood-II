@@ -51,3 +51,6 @@ output a debug apk in `app/build/outputs/apk/debug`
 
 [MIT](https://github.com/GunshipPenguin/open_flood/blob/master/LICENSE)
 © Rhys Rustad-Elliott
+
+Fonts are Licensed under the [SIL Open Font License](https://github.com/ThePreviousOne/open_flood/blob/master/OFL.txt)
+

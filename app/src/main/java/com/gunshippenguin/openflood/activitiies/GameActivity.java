@@ -1,7 +1,8 @@
-package com.gunshippenguin.openflood;
+package com.gunshippenguin.openflood.activitiies;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
@@ -9,7 +10,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
@@ -19,10 +19,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.gunshippenguin.openflood.ColorButton;
+import com.gunshippenguin.openflood.Game;
+import com.gunshippenguin.openflood.R;
+import com.gunshippenguin.openflood.views.Butter;
+import com.gunshippenguin.openflood.views.EndGameDialogFragment;
+import com.gunshippenguin.openflood.views.FloodView;
+import com.gunshippenguin.openflood.views.SeedDialogFragment;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 /**
  * Activity allowing the user to play the actual game.
@@ -47,6 +55,11 @@ public class GameActivity extends AppCompatActivity
 
     // Paints to be used for the board
     private Paint paints[];
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -256,7 +269,7 @@ public class GameActivity extends AppCompatActivity
 
             showToast();
 
-            timer.schedule(new DelayTimer(), 3250);
+            timer.schedule(new DelayTimer(), 2250);
         }
     }
 
@@ -277,8 +290,7 @@ public class GameActivity extends AppCompatActivity
         ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("seed", game.getSeed());
         clipboard.setPrimaryClip(clip);
-        Toast toast = Toast.makeText(this, getString(R.string.game_seed_copied), Toast.LENGTH_SHORT);
-        toast.show();
+        new Butter(this, R.string.game_seed_copied).setButteredToastDuration(Toast.LENGTH_LONG).addJam().show();
     }
 
     public void onNewGameFromSeedClick(String seed) {
@@ -287,9 +299,11 @@ public class GameActivity extends AppCompatActivity
 
     public void showToast() {
         if (game.checkWin()) {
-            new Butter( this, R.string.endgame_win_toast).show();
+            new Butter(this, R.string.endgame_win_toast)
+                    .setFont("fonts/Yahfie-Heavy.ttf").setFontSize(24).addJam().show();
         } else {
-            new Butter( this, R.string.endgame_lose_toast).show();
+            new Butter(this, R.string.endgame_lose_toast)
+                    .setFont("fonts/Yahfie-Heavy.ttf").setFontSize(24).addJam().show();
         }
     }
 

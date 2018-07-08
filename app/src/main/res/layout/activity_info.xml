@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:padding="@dimen/outer_layout_padding">
@@ -30,7 +31,7 @@
             android:layout_height="wrap_content"
             android:gravity="end"
             android:text="@string/app_name"
-            android:id="@+id/appNameTextView"
+            android:id="@+id/textView3"
             android:textSize="@dimen/large_text_size" />
 
     </LinearLayout>
@@ -43,6 +44,7 @@
         android:layout_margin="@dimen/box_margins">
 
         <TextView
+            android:textAppearance="@style/TextAppearance.FontPath"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/medium_text_size"
@@ -50,6 +52,7 @@
             android:layout_gravity="center" />
 
         <TextView
+            android:textAppearance="@style/TextAppearance.FontPath"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/info_license"
@@ -58,6 +61,7 @@
             android:layout_gravity="center_horizontal" />
 
         <TextView
+            android:textAppearance="@style/TextAppearance.FontPath"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/info_source"
@@ -80,6 +84,7 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:textAppearance="@style/TextAppearance.FontPath"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="@string/info_instructions_title"
@@ -88,6 +93,7 @@
                 android:id="@+id/textView4" />
 
             <TextView
+                android:textAppearance="@style/TextAppearance.FontPath"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:text="@string/info_instructions"
@@ -95,6 +101,7 @@
                 android:id="@+id/textView5" />
 
             <TextView
+                android:textAppearance="@style/TextAppearance.FontPath"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/info_seeds_title"
@@ -103,6 +110,7 @@
                 android:id="@+id/textView8" />
 
             <TextView
+                android:textAppearance="@style/TextAppearance.FontPath"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/info_seeds"
@@ -110,6 +118,7 @@
                 android:id="@+id/textView9" />
 
             <Button
+                android:textAppearance="@style/TextAppearance.FontPath"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/info_back"

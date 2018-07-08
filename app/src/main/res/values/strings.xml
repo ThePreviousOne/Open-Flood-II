@@ -50,4 +50,5 @@
         To generate a board from a seed, hold down the new game button.
     </string>
     <string name="info_back">Back</string>
+    <string name="about">Eric Hamber Secondary Class of 2016</string>
 </resources>

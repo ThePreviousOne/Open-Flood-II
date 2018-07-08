@@ -3,23 +3,24 @@
     package="com.gunshippenguin.openflood">
 
     <application
+        android:name=".OpenFloodApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:fullBackupContent="@xml/backup_descriptor">
-        <activity android:name=".GameActivity"
+        <activity android:name=".activitiies.GameActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SettingsActivity"
+        <activity android:name=".activitiies.SettingsActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name="com.gunshippenguin.openflood.InfoActivity"
+        <activity android:name="com.gunshippenguin.openflood.activitiies.InfoActivity"
             android:screenOrientation="portrait">
         </activity>
     </application>

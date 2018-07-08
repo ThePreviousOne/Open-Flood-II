@@ -66,10 +66,11 @@
         app:layout_columnSpan="3" />
 
     <TextView
+        android:textAppearance="@style/TextAppearance.FontPath"
         android:id="@+id/seedTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="@dimen/small_text_size"
         app:layout_column="0"
         app:layout_row="4"
         app:layout_columnSpan="3"/>

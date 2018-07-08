@@ -1,5 +1,6 @@
-package com.gunshippenguin.openflood;
+package com.gunshippenguin.openflood.activitiies;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,6 +13,11 @@ import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.gunshippenguin.openflood.R;
+import com.gunshippenguin.openflood.views.ClearHighScoresDialogFragment;
+
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+
 /**
  * Activity allowing the user to configure settings.
  */
@@ -20,6 +26,11 @@ public class SettingsActivity extends AppCompatActivity {
     int[] boardSizeChoices, numColorsChoices;
 
     private int selectedBoardSize, selectedNumColors;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
