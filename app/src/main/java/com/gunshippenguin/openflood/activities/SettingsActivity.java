@@ -1,4 +1,4 @@
-package com.gunshippenguin.openflood.activitiies;
+package com.gunshippenguin.openflood.activities;
 
 import android.content.Context;
 import android.content.Intent;

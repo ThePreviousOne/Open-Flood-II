@@ -7,44 +7,42 @@
     android:layout_height="wrap_content"
     android:background="@drawable/background_box"
     app:columnCount= "4"
-    app:rowCount="5">
+    app:rowCount="7" >
 
     <ImageView
         android:id="@+id/highScoreMedalImageView"
-        android:layout_width="@dimen/highscore_medal_size"
-        android:layout_height="@dimen/highscore_medal_size"
-        android:src="@drawable/highscore_medal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="start"
         app:layout_column="0"
         app:layout_row="0"
-        app:layout_rowSpan="2"/>
+        app:layout_rowSpan="2" />
 
     <LinearLayout
+        style="?android:attr/buttonBarStyle"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="end"
-        style="?android:attr/buttonBarStyle"
         app:layout_column="2"
         app:layout_row="0"
-        app:layout_columnSpan="2">
+        app:layout_columnSpan="2" >
 
         <Button
-            android:id="@+id/replayButton"
             style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/replayButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/endgame_replay"
             android:textSize="@dimen/small_text_size" />
 
         <Button
-            android:id="@+id/newGameButton"
             style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/newGameButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/endgame_new_game_button"
             android:textSize="@dimen/small_text_size" />
-
     </LinearLayout>
 
     <TextView
@@ -54,7 +52,8 @@
         android:textSize="@dimen/small_text_size"
         app:layout_column="1"
         app:layout_row="1"
-        app:layout_columnSpan="3"/>
+        app:layout_columnSpan="3"
+        app:layout_rowSpan="2" />
 
     <TextView
         android:id="@+id/highScoreText"
@@ -62,8 +61,9 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/small_text_size"
         app:layout_column="0"
-        app:layout_row="3"
-        app:layout_columnSpan="3" />
+        app:layout_row="4"
+        app:layout_columnSpan="3"
+        app:layout_rowSpan="2" />
 
     <TextView
         android:textAppearance="@style/TextAppearance.FontPath"
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/small_text_size"
         app:layout_column="0"
-        app:layout_row="4"
+        app:layout_row="6"
         app:layout_columnSpan="3"/>
 
 </android.support.v7.widget.GridLayout>

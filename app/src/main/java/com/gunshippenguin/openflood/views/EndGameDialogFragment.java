@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -17,8 +16,10 @@ import android.widget.TextView;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.github.megatronking.svg.support.SVGDrawable;
 import com.gunshippenguin.openflood.HighScoreManager;
 import com.gunshippenguin.openflood.R;
+import com.gunshippenguin.openflood.drawables.highscore;
 
 /**
  * Dialog Fragment that is displayed to the user upon a win or loss.
@@ -57,6 +58,7 @@ public class EndGameDialogFragment extends DialogFragment {
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext());
         HighScoreManager highScoreManager = new HighScoreManager(sp);
+        highScoreMedalImageView.setImageDrawable(new SVGDrawable(new highscore(getContext())));
 
         int boardSize = sp.getInt("board_size", -1);
         int numColors = sp.getInt("num_colors", -1);

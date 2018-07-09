@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'svg'
 
 android {
     compileSdkVersion 27
@@ -11,6 +12,23 @@ android {
         versionName "1.3.5"
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
+    svg {
+        // vector resources
+        vectorDirs = ["src/main/svg/vector"]
+        // shape resources
+        shapeDir = "src/main/svg/shape"
+        // java classpath
+        javaDir = "src/main/java/com/gunshippenguin/openflood/drawables"
+
+        svg2vector {
+            test {
+                svgDir = "${rootDir}/app/svg"
+                vectorDir = "src/main/svg/drawable"
+                height = 64
+                width = 64
+            }
+        }
+    }
 }
 
 dependencies {
@@ -20,6 +38,7 @@ dependencies {
     implementation 'com.android.support:gridlayout-v7:27.1.1'
     implementation 'com.github.ThePreviousOne:Calligraphy:master-SNAPSHOT'
     implementation 'io.github.inflationx:viewpump:1.0.0'
+    implementation 'com.github.megatronking:svg-support:1.3.2'
 
     testImplementation 'junit:junit:4.12'
 

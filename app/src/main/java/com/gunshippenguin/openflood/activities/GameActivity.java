@@ -1,4 +1,4 @@
-package com.gunshippenguin.openflood.activitiies;
+package com.gunshippenguin.openflood.activities;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -18,10 +18,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.megatronking.svg.support.SVGDrawable;
 import com.google.gson.Gson;
 import com.gunshippenguin.openflood.ColorButton;
 import com.gunshippenguin.openflood.Game;
 import com.gunshippenguin.openflood.R;
+import com.gunshippenguin.openflood.drawables.info;
+import com.gunshippenguin.openflood.drawables.playoutline;
+import com.gunshippenguin.openflood.drawables.settings;
 import com.gunshippenguin.openflood.views.Butter;
 import com.gunshippenguin.openflood.views.EndGameDialogFragment;
 import com.gunshippenguin.openflood.views.FloodView;
@@ -77,16 +81,8 @@ public class GameActivity extends AppCompatActivity
         initPaints();
         floodView.setPaints(paints);
 
-        ImageView settingsButton = findViewById(R.id.settingsButton);
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-                                              @Override
-                                              public void onClick(View v) {
-              Intent launchSettingsIntent = new Intent(GameActivity.this, SettingsActivity.class);
-              startActivityForResult(launchSettingsIntent, UPDATE_SETTINGS);
-              }
-        });
-
         ImageView infoButton = findViewById(R.id.infoButton);
+        infoButton.setImageDrawable(new SVGDrawable(new info(this)));
         infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +91,18 @@ public class GameActivity extends AppCompatActivity
             }
         });
 
+        ImageView settingsButton = findViewById(R.id.settingsButton);
+        settingsButton.setImageDrawable(new SVGDrawable(new settings(this)));
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+                                              @Override
+                                              public void onClick(View v) {
+              Intent launchSettingsIntent = new Intent(GameActivity.this, SettingsActivity.class);
+              startActivityForResult(launchSettingsIntent, UPDATE_SETTINGS);
+              }
+        });
+
         ImageView newGameButton = findViewById(R.id.newGameButton);
+        newGameButton.setImageDrawable(new SVGDrawable(new playoutline(this)));
         newGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
