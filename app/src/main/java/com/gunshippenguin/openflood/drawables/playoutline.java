@@ -26,13 +26,13 @@ public class playoutline extends SVGRenderer {
     public void render(Canvas canvas, int w, int h, ColorFilter filter) {
         final float scaleX = w / 24.0f;
         final float scaleY = h / 24.0f;
-        
+
         mPath.reset();
         mRenderPath.reset();
-        
+
         mFinalPathMatrix.setValues(new float[]{1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f});
         mFinalPathMatrix.postScale(scaleX, scaleY);
-        
+
         mPath.moveTo(10.0f, 16.5f);
         mPath.rLineTo(6.0f, -4.5f);
         mPath.rLineTo(-6.0f, -4.5f);
@@ -53,7 +53,7 @@ public class playoutline extends SVGRenderer {
         mPath.rCubicTo(0.0f, 4.41f, -3.59f, 8.0f, -8.0f, 8.0f);
         mPath.close();
         mPath.moveTo(12.0f, 20.0f);
-        
+
         mRenderPath.addPath(mPath, mFinalPathMatrix);
         if (mFillPaint == null) {
             mFillPaint = new Paint();

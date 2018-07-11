@@ -26,13 +26,13 @@ public class info extends SVGRenderer {
     public void render(Canvas canvas, int w, int h, ColorFilter filter) {
         final float scaleX = w / 24.0f;
         final float scaleY = h / 24.0f;
-        
+
         mPath.reset();
         mRenderPath.reset();
-        
+
         mFinalPathMatrix.setValues(new float[]{1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f});
         mFinalPathMatrix.postScale(scaleX, scaleY);
-        
+
         mPath.moveTo(12.0f, 2.0f);
         mPath.cubicTo(6.48f, 2.0f, 2.0f, 6.48f, 2.0f, 12.0f);
         mPath.rCubicTo(0.0f, 5.52f, 4.48f, 10.0f, 10.0f, 10.0f);
@@ -54,7 +54,7 @@ public class info extends SVGRenderer {
         mPath.rLineTo(0f, 2.0f);
         mPath.close();
         mPath.moveTo(13.0f, 9.0f);
-        
+
         mRenderPath.addPath(mPath, mFinalPathMatrix);
         if (mFillPaint == null) {
             mFillPaint = new Paint();

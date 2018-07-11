@@ -52,7 +52,7 @@ public class SettingsTest {
 
     private static void clickColorButton(int index) {
         ViewInteraction colorButton = onView(
-                allOf(withClassName(is("com.gunshippenguin.openflood.ColorButton")),
+                allOf(withClassName(is("com.gunshippenguin.openflood.utils.ColorButton")),
                         withParent(withId(R.id.buttonLayout)),
                         isDisplayed(),
                         nthChildOf(withId(R.id.buttonLayout), index)));

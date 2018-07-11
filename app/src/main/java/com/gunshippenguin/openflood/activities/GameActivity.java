@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.github.megatronking.svg.support.SVGDrawable;
 import com.google.gson.Gson;
-import com.gunshippenguin.openflood.ColorButton;
+import com.gunshippenguin.openflood.utils.ColorButton;
 import com.gunshippenguin.openflood.Game;
 import com.gunshippenguin.openflood.R;
 import com.gunshippenguin.openflood.drawables.info;
@@ -48,7 +48,6 @@ public class GameActivity extends AppCompatActivity
     private Game game;
     private SharedPreferences sp;
     private SharedPreferences.Editor spEditor;
-    private Timer timer = new Timer();
 
     private FloodView floodView;
     private TextView stepsTextView;
@@ -190,7 +189,7 @@ public class GameActivity extends AppCompatActivity
 
         layoutColorButtons();
 
-        stepsTextView.setText(game.getSteps() + " / " + game.getMaxSteps());
+        stepsTextView.setText(String.format("%d / %d", game.getSteps(), game.getMaxSteps()));
         floodView.setBoardSize(getBoardSize());
         floodView.drawGame(game);
     }
@@ -231,14 +230,13 @@ public class GameActivity extends AppCompatActivity
                 public void onClick(View v) {
                     v.startAnimation(AnimationUtils.loadAnimation(GameActivity.this, R.anim.button_anim));
                     if (localI != lastColor) {
-                        doColor(localI);
+                            doColor(localI);
                     }
                 }
             });
             newButton.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.MATCH_PARENT, 1.0f));
             newButton.setPadding(buttonPadding, buttonPadding, buttonPadding, buttonPadding);
-
             newButton.setColorBlindText(Integer.toString(i + 1));
             newButton.setColor(paints[i].getColor());
             buttonLayout.addView(newButton);
@@ -268,15 +266,14 @@ public class GameActivity extends AppCompatActivity
             game.flood(color);
             floodView.drawGame(game);
             lastColor = color;
-            stepsTextView.setText(game.getSteps() + " / " + game.getMaxSteps());
+            stepsTextView.setText(String.format("%d / %d", game.getSteps(), game.getMaxSteps()));
         }
 
         if (game.checkWin() || game.getSteps() == game.getMaxSteps()) {
             setGameFinished(true);
-
             showToast();
 
-            timer.schedule(new DelayTimer(), 2250);
+            new Timer().schedule(new DelayTimer(), 2250);
         }
     }
 
@@ -288,16 +285,12 @@ public class GameActivity extends AppCompatActivity
         newGame(game.getSeed());
     }
 
-    public void onLaunchSeedDialogClick() {
-        SeedDialogFragment seedDialogFragment = new SeedDialogFragment();
-        seedDialogFragment.show(getSupportFragmentManager(), "SeedDialog");
-    }
-
     public void onGetSeedClick() {
         ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("seed", game.getSeed());
         clipboard.setPrimaryClip(clip);
-        new Butter(this, R.string.game_seed_copied).setButteredToastDuration(Toast.LENGTH_LONG).addJam().show();
+        new Butter(this, R.string.game_seed_copied)
+                .setButteredToastDuration(Toast.LENGTH_LONG).addJam().show();
     }
 
     public void onNewGameFromSeedClick(String seed) {
@@ -305,13 +298,10 @@ public class GameActivity extends AppCompatActivity
     }
 
     public void showToast() {
-        if (game.checkWin()) {
-            new Butter(this, R.string.endgame_win_toast)
-                    .setFont("fonts/Yahfie-Heavy.ttf").setFontSize(24).addJam().show();
-        } else {
-            new Butter(this, R.string.endgame_lose_toast)
-                    .setFont("fonts/Yahfie-Heavy.ttf").setFontSize(24).addJam().show();
-        }
+        if (game.checkWin()) new Butter(this, R.string.endgame_win_toast)
+                .setFontSize(24).addJam().show();
+        else new Butter(this, R.string.endgame_lose_toast)
+                .setFontSize(24).addJam().show();
     }
 
     private void showEndGameDialog() {

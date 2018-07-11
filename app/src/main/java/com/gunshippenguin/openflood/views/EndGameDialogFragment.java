@@ -17,7 +17,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.github.megatronking.svg.support.SVGDrawable;
-import com.gunshippenguin.openflood.HighScoreManager;
+import com.gunshippenguin.openflood.utils.HighScoreManager;
 import com.gunshippenguin.openflood.R;
 import com.gunshippenguin.openflood.drawables.highscore;
 

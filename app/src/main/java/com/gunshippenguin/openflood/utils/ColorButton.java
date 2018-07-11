@@ -1,4 +1,4 @@
-package com.gunshippenguin.openflood;
+package com.gunshippenguin.openflood.utils;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -9,6 +9,8 @@ import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+
+import com.gunshippenguin.openflood.R;
 
 public class ColorButton extends View {
     String text;

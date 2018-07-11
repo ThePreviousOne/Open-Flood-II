@@ -1,6 +1,5 @@
 package com.gunshippenguin.openflood;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
@@ -103,8 +102,7 @@ public class Game {
             return;
         }
 
-        Queue<BoardPoint> queue = new LinkedList<BoardPoint>();
-        ArrayList<BoardPoint> processed = new ArrayList<BoardPoint>();
+        Queue<BoardPoint> queue = new LinkedList<>();
 
         queue.add(new BoardPoint(0, 0));
 
@@ -113,20 +111,16 @@ public class Game {
             currPoint = queue.remove();
             if (board[currPoint.getY()][currPoint.getX()] == targetColor) {
                 board[currPoint.getY()][currPoint.getX()] = replacementColor;
-                if (currPoint.getX() != 0 &&
-                        !processed.contains(new BoardPoint(currPoint.getX() - 1, currPoint.getY()))) {
+                if (currPoint.getX() != 0) {
                     queue.add(new BoardPoint(currPoint.getX() - 1, currPoint.getY()));
                 }
-                if (currPoint.getX() != boardSize - 1 &&
-                        !processed.contains(new BoardPoint(currPoint.getX() + 1, currPoint.getY()))) {
+                if (currPoint.getX() != boardSize - 1) {
                     queue.add(new BoardPoint(currPoint.getX() + 1, currPoint.getY()));
                 }
-                if (currPoint.getY() != 0 &&
-                        !processed.contains(new BoardPoint(currPoint.getX(), currPoint.getY() - 1))) {
+                if (currPoint.getY() != 0 ) {
                     queue.add(new BoardPoint(currPoint.getX(), currPoint.getY() - 1));
                 }
-                if (currPoint.getY() != boardSize - 1 &&
-                        !processed.contains(new BoardPoint(currPoint.getX(), currPoint.getY() + 1))) {
+                if (currPoint.getY() != boardSize - 1 ) {
                     queue.add(new BoardPoint(currPoint.getX(), currPoint.getY() + 1));
                 }
             }
@@ -139,8 +133,8 @@ public class Game {
         for (int[] aBoard : board) {
             for (int x = 0; x < board.length; x++) {
                 if (lastColor != aBoard[x]) {
-                    return false;
-                }
+                        return false;
+                    }
                 lastColor = aBoard[x];
             }
         }
@@ -148,7 +142,7 @@ public class Game {
     }
 
     private class BoardPoint {
-        int x, y;
+        private int x, y;
 
         BoardPoint(int x, int y) {
             this.x = x;

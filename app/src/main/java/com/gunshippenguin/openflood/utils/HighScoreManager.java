@@ -1,4 +1,4 @@
-package com.gunshippenguin.openflood;
+package com.gunshippenguin.openflood.utils;
 
 import android.content.SharedPreferences;
 

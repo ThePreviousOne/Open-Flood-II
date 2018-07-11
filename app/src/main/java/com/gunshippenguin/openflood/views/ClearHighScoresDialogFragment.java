@@ -11,9 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.gunshippenguin.openflood.HighScoreManager;
+import com.gunshippenguin.openflood.utils.HighScoreManager;
 import com.gunshippenguin.openflood.R;
-import com.gunshippenguin.openflood.views.Butter;
 
 public class ClearHighScoresDialogFragment extends DialogFragment {
 
@@ -40,7 +39,7 @@ public class ClearHighScoresDialogFragment extends DialogFragment {
                 }
                 dialog.dismiss();
 
-                new Butter(getContext(), R.string.settings_clear_high_scores_toast)
+                new Butter(getContext(), R.string.settings_clear_high_scores_toast).setFont("fonts/Lenka.ttf")
                         .setButteredToastDuration(Toast.LENGTH_LONG).addJam().show();
             }
         });

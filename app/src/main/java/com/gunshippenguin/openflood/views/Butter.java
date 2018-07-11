@@ -70,7 +70,7 @@ public class Butter extends Toast {
         background.getPaint().setStyle(Paint.Style.FILL);
         rl.setLayoutParams(lp);
         textView.setPadding(10, 0,10, 0);
-        if (font == null) font = Typeface.createFromAsset(context.getAssets(), "fonts/PierceRoman.otf");
+        if (font == null) font = Typeface.createFromAsset(context.getAssets(), "fonts/Yahfie-Heavy.ttf");
         textView.setTypeface(font);
         textView.setTextSize(textSize);
         textView.setBackground(background);
