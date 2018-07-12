@@ -39,6 +39,13 @@
                     android:scaleType="centerCrop"
                     android:adjustViewBounds="true"
                     android:background="@null"
+                    android:id="@+id/undoButton" />
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    android:background="@null"
                     android:id="@+id/infoButton" />
                 <ImageButton
                     android:layout_width="wrap_content"

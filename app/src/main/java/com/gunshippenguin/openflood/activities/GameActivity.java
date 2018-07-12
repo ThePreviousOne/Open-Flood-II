@@ -26,6 +26,8 @@ import com.gunshippenguin.openflood.R;
 import com.gunshippenguin.openflood.drawables.info;
 import com.gunshippenguin.openflood.drawables.playoutline;
 import com.gunshippenguin.openflood.drawables.settings;
+import com.gunshippenguin.openflood.drawables.undo;
+import com.gunshippenguin.openflood.utils.JsonStack;
 import com.gunshippenguin.openflood.views.Butter;
 import com.gunshippenguin.openflood.views.EndGameDialogFragment;
 import com.gunshippenguin.openflood.views.FloodView;
@@ -46,6 +48,7 @@ public class GameActivity extends AppCompatActivity
     private final int UPDATE_SETTINGS = 1;
 
     private Game game;
+    private JsonStack undoList;
     private SharedPreferences sp;
     private SharedPreferences.Editor spEditor;
 
@@ -79,6 +82,15 @@ public class GameActivity extends AppCompatActivity
         // Initialize the paints array and pass it to the FloodView
         initPaints();
         floodView.setPaints(paints);
+
+        final ImageView undoButton = findViewById(R.id.undoButton);
+        undoButton.setImageDrawable(new SVGDrawable(new undo(this)));
+        undoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                undo();
+            }
+        });
 
         ImageView infoButton = findViewById(R.id.infoButton);
         infoButton.setImageDrawable(new SVGDrawable(new info(this)));
@@ -185,6 +197,7 @@ public class GameActivity extends AppCompatActivity
 
     private void initGame() {
         setGameFinished(false);
+        undoList = new JsonStack();
         lastColor = game.getColor(0, 0);
 
         layoutColorButtons();
@@ -217,6 +230,18 @@ public class GameActivity extends AppCompatActivity
         }
     }
 
+    private void undo() {
+        if(!undoList.isEmpty()) {
+            int color = undoList.peek()[0][0];
+            game = new Game(undoList.pop(), getBoardSize(), getNumColors(),
+                    game.getSteps() -  1, game.getSeed());
+            doColor(color);
+        } else {
+           new Butter(this, R.string.undo_toast).setFont("fonts/Lenka.ttf")
+                   .addJam().show();
+        }
+    }
+
     private void layoutColorButtons() {
         // Add color buttons
         LinearLayout buttonLayout = findViewById(R.id.buttonLayout);
@@ -230,6 +255,7 @@ public class GameActivity extends AppCompatActivity
                 public void onClick(View v) {
                     v.startAnimation(AnimationUtils.loadAnimation(GameActivity.this, R.anim.button_anim));
                     if (localI != lastColor) {
+                            undoList.push(game.getBoard());
                             doColor(localI);
                     }
                 }

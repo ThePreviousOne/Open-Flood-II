@@ -3,6 +3,7 @@
 
     <!-- Game Activity -->
     <string name="game_seed_copied">Board seed copied to clipboard</string>
+    <string name="undo_toast">No undoes left</string>
 
     <!-- End Game Dialog -->
     <string name="endgame_win_toast">Excellent</string>
