@@ -19,7 +19,7 @@ import android.preference.PreferenceManager;
 import com.github.megatronking.svg.support.SVGDrawable;
 import com.gunshippenguin.openflood.utils.HighScoreManager;
 import com.gunshippenguin.openflood.R;
-import com.gunshippenguin.openflood.drawables.highscore;
+import com.gunshippenguin.openflood.drawables.Highscore;
 
 /**
  * Dialog Fragment that is displayed to the user upon a win or loss.
@@ -58,7 +58,7 @@ public class EndGameDialogFragment extends DialogFragment {
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext());
         HighScoreManager highScoreManager = new HighScoreManager(sp);
-        highScoreMedalImageView.setImageDrawable(new SVGDrawable(new highscore(getContext())));
+        highScoreMedalImageView.setImageDrawable(new SVGDrawable(new Highscore(getContext())));
 
         int boardSize = sp.getInt("board_size", -1);
         int numColors = sp.getInt("num_colors", -1);

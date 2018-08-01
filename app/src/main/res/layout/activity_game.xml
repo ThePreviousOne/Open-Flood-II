@@ -1,84 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    android:padding="@dimen/outer_layout_padding"
     android:gravity="center"
-    android:keepScreenOn="true">
+    android:keepScreenOn="true"
+    android:padding="@dimen/outer_layout_padding"
+    android:layout_marginTop="5dp">
 
     <include layout="@layout/header_layout" />
 
+    <TextView
+        android:id="@+id/stepsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/outer_layout_padding"
+        android:textSize="@dimen/large_text_size"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/header" />
+
+    <ImageButton
+        android:id="@+id/newGameButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/outer_layout_padding"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:scaleType="centerCrop"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/header" />
+
+    <ImageButton
+        android:id="@+id/restartButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/outer_layout_padding"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:scaleType="centerCrop"
+        android:layout_toStartOf="@id/newGameButton"
+        android:layout_below="@+id/header" />
+
+    <ImageButton
+        android:id="@+id/undoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/outer_layout_padding"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:scaleType="centerCrop"
+        android:layout_toStartOf="@id/restartButton"
+        android:layout_below="@+id/header" />
+
+    <com.gunshippenguin.openflood.views.FloodView
+        android:id="@+id/floodView"
+        android:layout_width="wrap_content"
+        android:layout_height="373dp"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/undoButton" />
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="25dp"
+        android:background="@android:color/darker_gray"
+        android:layout_below="@+id/floodView"/>
+
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/buttonLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background_box"
-        android:layout_margin="@dimen/box_margins">
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="@dimen/outer_layout_padding"
+        android:orientation="horizontal"
+        android:layout_below="@id/separator"
+        android:layout_alignParentBottom="true"/>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:gravity="center_vertical"
-            android:layout_weight="1">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/stepsTextView"
-                android:textSize="@dimen/large_text_size" />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="end">
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    android:adjustViewBounds="true"
-                    android:background="@null"
-                    android:id="@+id/undoButton" />
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    android:adjustViewBounds="true"
-                    android:background="@null"
-                    android:id="@+id/infoButton" />
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:adjustViewBounds="true"
-                    android:background="@null"
-                    android:id="@+id/settingsButton" />
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    android:adjustViewBounds="true"
-                    android:background="@null"
-                    android:id="@+id/newGameButton" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <com.gunshippenguin.openflood.views.FloodView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:id="@+id/floodView"
-            android:layout_weight="8"
-            android:layout_margin="@dimen/box_margins"/>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:id="@+id/buttonLayout"
-            android:layout_weight="1.5">
-
-        </LinearLayout>
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

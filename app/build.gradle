@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.gunshippenguin.openflood"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 27
         versionCode 12
         versionName "1.3.5"
@@ -14,16 +14,16 @@ android {
     }
     svg {
         // vector resources
-        vectorDirs = ["src/main/svg/vector"]
+        vectorDirs = ["svg/vector"]
         // shape resources
-        shapeDir = "src/main/svg/shape"
+        shapeDir = "svg/shape"
         // java classpath
-        javaDir = "src/main/java/com/gunshippenguin/openflood/drawables"
+        javaDir = "svg/drawables"
 
         svg2vector {
             test {
                 svgDir = "${rootDir}/app/svg"
-                vectorDir = "src/main/svg/drawable"
+                vectorDir = "svg/vector"
                 height = 64
                 width = 64
             }

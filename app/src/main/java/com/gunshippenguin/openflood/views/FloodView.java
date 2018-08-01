@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -23,7 +24,7 @@ public class FloodView extends View {
     private Paint textPaint;
     private Paint paints[];
 
-    public FloodView(Context context, AttributeSet attrs) {
+    public FloodView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
         textPaint = new Paint();

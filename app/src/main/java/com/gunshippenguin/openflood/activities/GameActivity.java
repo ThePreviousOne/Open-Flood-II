@@ -3,7 +3,6 @@ package com.gunshippenguin.openflood.activities;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -23,10 +22,9 @@ import com.google.gson.Gson;
 import com.gunshippenguin.openflood.utils.ColorButton;
 import com.gunshippenguin.openflood.Game;
 import com.gunshippenguin.openflood.R;
-import com.gunshippenguin.openflood.drawables.info;
-import com.gunshippenguin.openflood.drawables.playoutline;
-import com.gunshippenguin.openflood.drawables.settings;
-import com.gunshippenguin.openflood.drawables.undo;
+import com.gunshippenguin.openflood.drawables.Replay;
+import com.gunshippenguin.openflood.drawables.Playoutline;
+import com.gunshippenguin.openflood.drawables.Undo;
 import com.gunshippenguin.openflood.utils.JsonStack;
 import com.gunshippenguin.openflood.views.Butter;
 import com.gunshippenguin.openflood.views.EndGameDialogFragment;
@@ -44,8 +42,6 @@ import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 public class GameActivity extends AppCompatActivity
         implements EndGameDialogFragment.EndGameDialogFragmentListener,
         SeedDialogFragment.SeedDialogFragmentListener {
-
-    private final int UPDATE_SETTINGS = 1;
 
     private Game game;
     private JsonStack undoList;
@@ -84,7 +80,8 @@ public class GameActivity extends AppCompatActivity
         floodView.setPaints(paints);
 
         final ImageView undoButton = findViewById(R.id.undoButton);
-        undoButton.setImageDrawable(new SVGDrawable(new undo(this)));
+        undoButton.setImageDrawable(new SVGDrawable(new Undo(this, 48f)));
+        undoButton.setColorFilter(0xFF272727);    //Darker Grey
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,34 +89,18 @@ public class GameActivity extends AppCompatActivity
             }
         });
 
-        ImageView infoButton = findViewById(R.id.infoButton);
-        infoButton.setImageDrawable(new SVGDrawable(new info(this)));
-        infoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent launchSettingsIntent = new Intent(GameActivity.this, InfoActivity.class);
-                startActivity(launchSettingsIntent);
-            }
-        });
-
-        ImageView settingsButton = findViewById(R.id.settingsButton);
-        settingsButton.setImageDrawable(new SVGDrawable(new settings(this)));
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-                                              @Override
-                                              public void onClick(View v) {
-              Intent launchSettingsIntent = new Intent(GameActivity.this, SettingsActivity.class);
-              startActivityForResult(launchSettingsIntent, UPDATE_SETTINGS);
-              }
-        });
-
         ImageView newGameButton = findViewById(R.id.newGameButton);
-        newGameButton.setImageDrawable(new SVGDrawable(new playoutline(this)));
+        newGameButton.setImageDrawable(new SVGDrawable(new Playoutline(this, 48f)));
+        newGameButton.setColorFilter(0xFF272727);    //Darker Grey
         newGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                spEditor.remove("state_saved");
+                spEditor.apply();
                 newGame();
             }
         });
+
         newGameButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -129,6 +110,15 @@ public class GameActivity extends AppCompatActivity
             }
         });
 
+        final ImageView restartButton = findViewById(R.id.restartButton);
+        restartButton.setImageDrawable(new SVGDrawable(new Replay(this, 48f)));
+        restartButton.setColorFilter(0xFF272727);    //Darker Grey
+        restartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newGame(game.getSeed());
+            }
+        });
         // Get the steps text view
         stepsTextView = findViewById(R.id.stepsTextView);
     }
@@ -149,11 +139,13 @@ public class GameActivity extends AppCompatActivity
     public void onStop() {
         super.onStop();
 
-        spEditor.putBoolean("state_saved", true);
-        spEditor.putString("state_board", new Gson().toJson(game.getBoard()));
-        spEditor.putInt("state_steps", game.getSteps());
-        spEditor.putString("state_seed", game.getSeed());
-        spEditor.apply();
+        if (game.getSteps() != 0 && !gameFinished) {
+            spEditor.putBoolean("state_saved", true);
+            spEditor.putString("state_board", new Gson().toJson(game.getBoard()));
+            spEditor.putInt("state_steps", game.getSteps());
+            spEditor.putString("state_seed", game.getSeed());
+            spEditor.apply();
+        }
     }
 
     private void setGameFinished(boolean state) {
@@ -266,24 +258,6 @@ public class GameActivity extends AppCompatActivity
             newButton.setColorBlindText(Integer.toString(i + 1));
             newButton.setColor(paints[i].getColor());
             buttonLayout.addView(newButton);
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == UPDATE_SETTINGS) {
-            if (resultCode == RESULT_OK) {
-                Bundle extras = data.getExtras();
-                // Only start a new game if the settings have been changed
-                if (extras.getBoolean("gameSettingsChanged")) {
-                    newGame();
-                }
-                if (extras.getBoolean("colorSettingsChanged")) {
-                    initPaints();
-                    floodView.setPaints(paints);
-                    layoutColorButtons();
-                }
-            }
         }
     }
 

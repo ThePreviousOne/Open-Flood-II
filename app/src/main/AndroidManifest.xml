@@ -10,17 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:fullBackupContent="@xml/backup_descriptor">
-        <activity android:name=".activities.GameActivity"
+        <activity android:name=".activities.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.GameActivity"
+            android:screenOrientation="portrait">
+        </activity>
         <activity android:name=".activities.SettingsActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name="com.gunshippenguin.openflood.activities.InfoActivity"
+        <activity android:name=".activities.InfoActivity"
             android:screenOrientation="portrait">
         </activity>
     </application>

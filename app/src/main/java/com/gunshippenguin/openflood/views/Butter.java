@@ -58,8 +58,7 @@ public class Butter extends Toast {
         RelativeLayout rl= new RelativeLayout(context);
         TextView textView = new TextView(context);
 
-        LayoutParams lp = new LayoutParams(
-                LayoutParams.MATCH_PARENT, MATCH_PARENT);
+        LayoutParams lp = new LayoutParams(MATCH_PARENT, MATCH_PARENT);
         RoundRectShape rect = new RoundRectShape(
                 new float[] {20, 20, 20, 20, 20, 20, 20, 20}, null, null);
         ShapeDrawable background = new ShapeDrawable(rect);
