@@ -229,8 +229,8 @@ public class GameActivity extends AppCompatActivity
                     game.getSteps() -  1, game.getSeed());
             doColor(color);
         } else {
-           new Butter(this, R.string.undo_toast).setFont("fonts/Lenka.ttf")
-                   .addJam().show();
+           new Butter(this, R.string.undo_toast)
+                   .setFont("fonts/Lenka.ttf").addJam().show();
         }
     }
 
@@ -289,8 +289,7 @@ public class GameActivity extends AppCompatActivity
         ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("seed", game.getSeed());
         clipboard.setPrimaryClip(clip);
-        new Butter(this, R.string.game_seed_copied)
-                .setButteredToastDuration(Toast.LENGTH_LONG).addJam().show();
+        new Butter(this, R.string.game_seed_copied, Toast.LENGTH_LONG).addJam().show();
     }
 
     public void onNewGameFromSeedClick(String seed) {
@@ -299,9 +298,9 @@ public class GameActivity extends AppCompatActivity
 
     public void showToast() {
         if (game.checkWin()) new Butter(this, R.string.endgame_win_toast)
-                .setFontSize(24).addJam().show();
+                .setFontSize(14).addJam().show();
         else new Butter(this, R.string.endgame_lose_toast)
-                .setFontSize(24).addJam().show();
+                .setFontSize(14).addJam().show();
     }
 
     private void showEndGameDialog() {

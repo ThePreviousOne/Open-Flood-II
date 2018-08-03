@@ -8,12 +8,11 @@ import android.graphics.drawable.shapes.RoundRectShape;
 
 import android.support.annotation.StringRes;
 import android.view.Gravity;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static android.widget.RelativeLayout.LayoutParams;
-import static android.widget.RelativeLayout.LayoutParams.*;
+import static android.view.ViewGroup.LayoutParams;
+import static android.view.ViewGroup.LayoutParams.*;
 
 /**
  * Make Toast (new Butter)
@@ -25,17 +24,23 @@ import static android.widget.RelativeLayout.LayoutParams.*;
 public class Butter extends Toast {
 
     private Context context;
-    private int resource;
+    private int string;
     private Typeface font;
+    private int textSize;
+    private int duration;
+    private int color;
 
-    private int duration = Toast.LENGTH_SHORT;
-    private int textSize = 18;
-
-    public Butter(Context context, @StringRes int resource) {
+    public Butter(Context context, @StringRes int string) {
+        this(context, string, Toast.LENGTH_SHORT);
+    }
+    public Butter(Context context, @StringRes int string, int duration) {
         super(context);
 
         this.context = context;
-        this.resource = resource;
+        this.string = string;
+        this.duration = duration;
+        this.textSize = dip2px(10);
+        this.color = 0x77FFFAF6;
     }
 
     public Butter setFont(String font) {
@@ -43,20 +48,22 @@ public class Butter extends Toast {
         return this;
     }
 
-    public Butter setFontSize(int size) {
-        textSize = size;
+    public Butter setFontSize(float size) {
+        textSize = dip2px(size);
         return this;
     }
 
-    public Butter setButteredToastDuration(int duration) {
-        this.duration = duration;
+    public Butter setBackgroundColor(int color) {
+        this.color = color;
         return this;
     }
 
     public Butter addJam() {
         //Initialize Views
-        RelativeLayout rl= new RelativeLayout(context);
+        int boarder = dip2px(5);
+        //RelativeLayout rl= new RelativeLayout(context);
         TextView textView = new TextView(context);
+        textView.setPadding( boarder, boarder, boarder, boarder);
 
         LayoutParams lp = new LayoutParams(MATCH_PARENT, MATCH_PARENT);
         RoundRectShape rect = new RoundRectShape(
@@ -65,20 +72,24 @@ public class Butter extends Toast {
         LayoutParams textLayout = new LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
 
         // Set params
-        background.getPaint().setColor(0xFFFFFAF6);
+        background.getPaint().setColor(color);
         background.getPaint().setStyle(Paint.Style.FILL);
-        rl.setLayoutParams(lp);
-        textView.setPadding(10, 0,10, 0);
+        //rl.setLayoutParams(lp);
         if (font == null) font = Typeface.createFromAsset(context.getAssets(), "fonts/Yahfie-Heavy.ttf");
         textView.setTypeface(font);
         textView.setTextSize(textSize);
         textView.setBackground(background);
         textView.setLayoutParams(textLayout);
-        textView.setText(context.getString(resource));
-        rl.addView(textView);
+        textView.setText(context.getString(string));
+        //rl.addView(textView);
         setDuration(duration);
         setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-        setView(rl);
+        setView(textView);
         return this;
     }
+
+    private int dip2px(float dipValue) {
+        return (int) (dipValue * context.getResources().getDisplayMetrics().density + 0.5f);
+    }
+
 }

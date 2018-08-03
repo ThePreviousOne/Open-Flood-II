@@ -39,8 +39,8 @@ public class ClearHighScoresDialogFragment extends DialogFragment {
                 }
                 dialog.dismiss();
 
-                new Butter(getContext(), R.string.settings_clear_high_scores_toast).setFont("fonts/Lenka.ttf")
-                        .setButteredToastDuration(Toast.LENGTH_LONG).addJam().show();
+                new Butter(getContext(), R.string.settings_clear_high_scores_toast, Toast.LENGTH_LONG)
+                        .setFont("fonts/Lenka.ttf").setBackgroundColor(0xFFFFFAF6).addJam().show();
             }
         });
 
