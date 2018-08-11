@@ -11,6 +11,8 @@ import android.view.Gravity;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gunshippenguin.openflood.utils.PixelConverter;
+
 import static android.view.ViewGroup.LayoutParams;
 import static android.view.ViewGroup.LayoutParams.*;
 
@@ -29,6 +31,7 @@ public class Butter extends Toast {
     private int textSize;
     private int duration;
     private int color;
+    private final PixelConverter pixelConverter;
 
     public Butter(Context context, @StringRes int string) {
         this(context, string, Toast.LENGTH_SHORT);
@@ -36,10 +39,11 @@ public class Butter extends Toast {
     public Butter(Context context, @StringRes int string, int duration) {
         super(context);
 
+        this.pixelConverter = new PixelConverter(context);
         this.context = context;
         this.string = string;
         this.duration = duration;
-        this.textSize = dip2px(10);
+        this.textSize = pixelConverter.dip2px(10);
         this.color = 0x77FFFAF6;
     }
 
@@ -49,7 +53,7 @@ public class Butter extends Toast {
     }
 
     public Butter setFontSize(float size) {
-        textSize = dip2px(size);
+        textSize = pixelConverter.dip2px(size);
         return this;
     }
 
@@ -60,7 +64,7 @@ public class Butter extends Toast {
 
     public Butter addJam() {
         //Initialize Views
-        int boarder = dip2px(5);
+        int boarder = pixelConverter.dip2px(5);
         //RelativeLayout rl= new RelativeLayout(context);
         TextView textView = new TextView(context);
         textView.setPadding( boarder, boarder, boarder, boarder);
@@ -86,10 +90,6 @@ public class Butter extends Toast {
         setGravity(Gravity.CENTER_VERTICAL, 0, 0);
         setView(textView);
         return this;
-    }
-
-    private int dip2px(float dipValue) {
-        return (int) (dipValue * context.getResources().getDisplayMetrics().density + 0.5f);
     }
 
 }
