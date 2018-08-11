@@ -27,10 +27,10 @@ public class OtherFloodView extends View {
         sp = PreferenceManager.getDefaultSharedPreferences(context);
         boardSizeX = sp.getInt("board_size", 18);
         setDrawingInfo();
-        initPaints();
     }
 
     public void initBoard() {
+        initPaints();
         final String SEED_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
         Random rand = new Random(System.currentTimeMillis());
         StringBuilder seed = new StringBuilder();
