@@ -9,8 +9,8 @@
     <color name="yellow">#FFCE2C</color>
     <color name="orange">#FF6F43</color>
     <color name="purple">#A13CB1</color>
-    <color name="cyan">#38FFFF</color>
-    <color name="pink">#f2739d</color>
+    <color name="light_grey">#DDDDDD</color>
+    <color name="grey">#777777</color>
 
     <!-- Old Board Colors -->
     <color name="hamberMaroon">#813237</color>
@@ -29,8 +29,8 @@
         <item>@color/yellow</item>
         <item>@color/orange</item>
         <item>@color/purple</item>
-        <item>@color/cyan</item>
-        <item>@color/pink</item>
+        <item>@color/light_grey</item>
+        <item>@color/grey</item>
     </array>
 
     <array name="oldBoardColorScheme">
