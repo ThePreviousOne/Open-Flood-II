@@ -17,15 +17,11 @@ A flood fill puzzle game for Android.
 
 ## Gameplay
 
-You start in the upper left hand corner of the board. Tap the colored buttons
-along the bottom of the board to flood all adjacent filled cells with that
-color. The aim of the game is to try to fill the entire board with a single
-color in less than the maximum number of allowed moves.
+Starting with the upper left hand corner of the board fill adjacent 
+cells with that color by tapping the colored buttons. The aim of the game
+is to try to fill the entire board with a single color.
 
-You can customize the number of colors and the board size by tapping the gear
-icon.
-
-You can generate a board from a seed by holding down the new game (star) icon.
+You can generate a board from a seed by holding down the new game icon.
 
 ## Building / Installing
 
