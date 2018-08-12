@@ -35,8 +35,7 @@
     <string name="settings_clear_high_scores_toast">Legjobb pontszámok kitörölve</string>
 
     <!--Info activity-->
-    <string name="info_license">MIT licensz alatt kibocsátva</string>
-    <string name="info_source"><a href="http://github.com/gunshippenguin/open_flood">github.com/GunshipPenguin/open_flood</a></string>
+    <string name="info_license">GPL 3.0+ licensz alatt kibocsátva</string>
     <string name="info_instructions_title">Játékszabályok</string>
     <string name="info_instructions">
         A tábla bal felső sarkában kezdesz. Érinstd meg a színes gombokat a tábla alatt

@@ -35,8 +35,7 @@
     <string name="settings_clear_high_scores_toast">Punteggi Migliori azzerati</string>
 
     <!--Info activity-->
-    <string name="info_license">Rilasciato sotto Licenza MIT</string>
-    <string name="info_source"><a href="http://github.com/gunshippenguin/open_flood">github.com/GunshipPenguin/open_flood</a></string>
+    <string name="info_license">Rilasciato sotto Licenza GPL 3.0+</string>
     <string name="info_instructions_title">Come si Gioca</string>
     <string name="info_instructions">
         Inizi nell\'angolo in alto a sinistra del campo di gioco. Tocca i pulsanti colorati lungo la

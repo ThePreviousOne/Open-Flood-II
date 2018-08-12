@@ -35,8 +35,7 @@
     <string name="settings_clear_high_scores_toast">Puntuaciones altas eliminadas</string>
 
     <!-- Info activity -->
-    <string name="info_license">Lanzado bajo la MIT License</string>
-    <string name="info_source"><a href="http://github.com/gunshippenguin/open_flood">github.com/GunshipPenguin/open_flood</a></string>
+    <string name="info_license">Lanzado bajo la GPL 3.0+ License</string>
     <string name="info_instructions_title">Jugabilidad</string>
     <string name="info_instructions">
         Comienza en la esquina superior izquierda del tablero. Toca los botones de colores que están

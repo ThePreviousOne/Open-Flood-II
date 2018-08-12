@@ -35,8 +35,7 @@
     <string name="settings_clear_high_scores_toast">Wyczyszczono najlepsze wyniki</string>
 
     <!--Info activity-->
-    <string name="info_license">Wydano na licencji MIT</string>
-    <string name="info_source"><a href="http://github.com/gunshippenguin/open_flood">github.com/GunshipPenguin/open_flood</a></string>
+    <string name="info_license">Wydano na licencji GPL 3.0+</string>
     <string name="info_instructions_title">Rozgrywka</string>
     <string name="info_instructions">Zaczynasz grę w lewym górnym rogu planszy. Stuknij w kolorowe pola na dole ekranu, aby zalać sąsiadujące wypełnione komórki wybranym kolorem. Celem gry jest zalanie całej planszy jednym kolorem w mniej ruchów niż ich maksymalna dozwolona liczba.</string>
     <string name="info_seeds_title">Zalążki</string>

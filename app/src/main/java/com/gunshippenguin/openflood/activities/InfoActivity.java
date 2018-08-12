@@ -55,14 +55,5 @@ public class InfoActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        findViewById(R.id.appNameTextView).setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                new Butter(InfoActivity.this, R.string.about).setFont("fonts/PierceRoman.otf")
-                        .setButteredToastDuration(Toast.LENGTH_LONG).addJam().show();
-                return true;
-            }
-        });
     }
 }

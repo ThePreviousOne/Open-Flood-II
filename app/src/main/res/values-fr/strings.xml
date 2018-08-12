@@ -35,8 +35,7 @@
     <string name="settings_clear_high_scores_toast">Meilleurs scores effacés</string>
 
     <!-- Info activity -->
-    <string name="info_license">Diffusé sous la licence MIT</string>
-    <string name="info_source"><a href="http://github.com/gunshippenguin/open_flood">github.com/GunshipPenguin/open_flood</a></string>
+    <string name="info_license">Diffusé sous la licence GPL 3.0+</string>
     <string name="info_instructions_title">Jeu</string>
     <string name="info_instructions">
        Vous commencez dans le coin supérieur gauche du tableau. Appuyez sur les boutons de couleur

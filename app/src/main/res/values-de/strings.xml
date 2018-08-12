@@ -35,8 +35,7 @@
     <string name="settings_clear_high_scores_toast">Highscores gelöscht</string>
 
     <!--Info activity-->
-    <string name="info_license">Veröffentlicht unter der MIT-Lizenz</string>
-    <string name="info_source"><a href="http://github.com/gunshippenguin/open_flood">github.com/GunshipPenguin/open_flood</a></string>
+    <string name="info_license">Veröffentlicht unter der GPL 3.0+ Lizenz</string>
     <string name="info_instructions_title">Spielablauf</string>
     <string name="info_instructions">
         Tippen Sie auf die farbigen Tasten entlang der Unterseite des Spielfelds, um alle zusammenhängend gefärbten Zellen
