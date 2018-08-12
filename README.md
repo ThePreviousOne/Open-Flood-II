@@ -1,19 +1,8 @@
 <p align="center">
-  <img src="branding/screenshot.png" height="400">
+  <img src="branding/Screenshot_Open_Flood_2.png" height="400">
 </p>
 
-<h1 align="center">Open Flood</h1>
-
-<p align="center">
-  <a href="https://play.google.com/store/apps/details?id=com.gunshippenguin.openflood">
-      <img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png" height="40"/>
-  </a>
-  <a href="https://f-droid.org/repository/browse/?fdid=com.gunshippenguin.openflood">
-      <img alt="Get Open Flood on F-Droid" src="https://f-droid.org/wiki/images/c/c4/F-Droid-button_available-on.png" height="40"/>
-  </a>
-</p>
-
-A flood fill puzzle game for Android.
+<h1 align="center">Open Flood2</h1>
 
 ## Gameplay
 
