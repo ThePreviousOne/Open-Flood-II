@@ -6,7 +6,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 
-import com.gunshippenguin.openflood.activities.GameActivity;
+import com.gunshippenguin.openflood.activities.RegularGameActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -26,7 +26,7 @@ import static org.hamcrest.Matchers.allOf;
 public class InfoActivityTest {
 
     @Rule
-    public ActivityTestRule<GameActivity> mActivityTestRule = new ActivityTestRule<>(GameActivity.class);
+    public ActivityTestRule<RegularGameActivity> mActivityTestRule = new ActivityTestRule<>(RegularGameActivity.class);
 
     @Test
     public void infoActivityTest() {
@@ -40,7 +40,7 @@ public class InfoActivityTest {
                 allOf(withId(R.id.backButton), withText("Back")));
         appCompatButton.perform(scrollTo(), click());
 
-        // Verify that we are now back in the GameActivity by checking that the FloodView is displayed
+        // Verify that we are now back in the RegularGameActivity by checking that the FloodView is displayed
         ViewInteraction view = onView(
                 allOf(withId(R.id.floodView)));
         view.check(matches(isDisplayed()));

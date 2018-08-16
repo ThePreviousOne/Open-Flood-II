@@ -4,9 +4,19 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
 
-    <style name="TextAppearance.FontPath" parent="android:TextAppearance">
+    <style name="TextAppearance.FontPath.Pierce" parent="android:TextAppearance">
         <!-- Custom Attr-->
         <item name="fontPath">fonts/PierceRoman.otf</item>
+    </style>
+
+    <style name="TextAppearance.FontPath.Yahfie" parent="android:TextAppearance">
+        <!-- Custom Attr-->
+        <item name="fontPath">fonts/Yahfie-Heavy.ttf</item>
+    </style>
+
+    <style name="TextAppearance.FontPath.Lenka" parent="android:TextAppearance">
+        <!-- Custom Attr-->
+        <item name="fontPath">fonts/Lenka.ttf</item>
     </style>
 
 </resources>

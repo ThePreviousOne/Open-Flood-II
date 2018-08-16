@@ -8,7 +8,7 @@ import android.test.suitebuilder.annotation.LargeTest;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gunshippenguin.openflood.activities.GameActivity;
+import com.gunshippenguin.openflood.activities.RegularGameActivity;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -60,7 +60,7 @@ public class SettingsTest {
     }
 
     @Rule
-    public ActivityTestRule<GameActivity> mActivityTestRule = new ActivityTestRule<>(GameActivity.class);
+    public ActivityTestRule<RegularGameActivity> mActivityTestRule = new ActivityTestRule<>(RegularGameActivity.class);
 
     @Test
     public void changeNumColorsTest() {

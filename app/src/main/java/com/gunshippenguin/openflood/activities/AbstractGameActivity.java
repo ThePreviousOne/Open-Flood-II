@@ -6,19 +6,18 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.megatronking.svg.support.SVGDrawable;
-import com.google.gson.Gson;
 import com.gunshippenguin.openflood.utils.ColorButton;
 import com.gunshippenguin.openflood.Game;
 import com.gunshippenguin.openflood.R;
@@ -26,12 +25,12 @@ import com.gunshippenguin.openflood.drawables.Replay;
 import com.gunshippenguin.openflood.drawables.Playoutline;
 import com.gunshippenguin.openflood.drawables.Undo;
 import com.gunshippenguin.openflood.utils.JsonStack;
+import com.gunshippenguin.openflood.utils.PixelConverter;
 import com.gunshippenguin.openflood.views.Butter;
 import com.gunshippenguin.openflood.views.EndGameDialogFragment;
 import com.gunshippenguin.openflood.views.FloodView;
 import com.gunshippenguin.openflood.views.SeedDialogFragment;
 
-import java.util.Timer;
 import java.util.TimerTask;
 
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
@@ -39,24 +38,29 @@ import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 /**
  * Activity allowing the user to play the actual game.
  */
-public class GameActivity extends AppCompatActivity
+abstract class AbstractGameActivity extends AppCompatActivity
         implements EndGameDialogFragment.EndGameDialogFragmentListener,
         SeedDialogFragment.SeedDialogFragmentListener {
 
-    private Game game;
-    private JsonStack undoList;
-    private SharedPreferences sp;
-    private SharedPreferences.Editor spEditor;
+    protected Game game;
+    protected JsonStack undoList;
+    protected SharedPreferences sp;
+    protected SharedPreferences.Editor spEditor;
 
-    private FloodView floodView;
-    private TextView stepsTextView;
+    protected FloodView floodView;
+    protected TextView stepsTextView;
 
-    private int lastColor;
+    protected int lastColor;
 
-    private boolean gameFinished;
+    protected boolean gameFinished;
+    protected boolean launchedFromBundle;
+    protected boolean returnBundle;
 
     // Paints to be used for the board
-    private Paint paints[];
+    protected Paint paints[];
+    protected PixelConverter pixelConverter;
+
+    protected final int darkerGrey = 0xFF272727;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -68,10 +72,7 @@ public class GameActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        // Initialize the SharedPreferences and SharedPreferences editor
-        sp = PreferenceManager.getDefaultSharedPreferences(this);
-        spEditor = sp.edit();
-
+        pixelConverter = new PixelConverter(this);
         // Get the FloodView
         floodView = findViewById(R.id.floodView);
 
@@ -81,7 +82,7 @@ public class GameActivity extends AppCompatActivity
 
         final ImageView undoButton = findViewById(R.id.undoButton);
         undoButton.setImageDrawable(new SVGDrawable(new Undo(this, 48f)));
-        undoButton.setColorFilter(0xFF272727);    //Darker Grey
+        undoButton.setColorFilter(darkerGrey);
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,18 +90,9 @@ public class GameActivity extends AppCompatActivity
             }
         });
 
-        ImageView newGameButton = findViewById(R.id.newGameButton);
+        final ImageView newGameButton = findViewById(R.id.newGameButton);
         newGameButton.setImageDrawable(new SVGDrawable(new Playoutline(this, 48f)));
-        newGameButton.setColorFilter(0xFF272727);    //Darker Grey
-        newGameButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                spEditor.remove("state_saved");
-                spEditor.apply();
-                newGame();
-            }
-        });
-
+        newGameButton.setColorFilter(darkerGrey);
         newGameButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -112,46 +104,54 @@ public class GameActivity extends AppCompatActivity
 
         final ImageView restartButton = findViewById(R.id.restartButton);
         restartButton.setImageDrawable(new SVGDrawable(new Replay(this, 48f)));
-        restartButton.setColorFilter(0xFF272727);    //Darker Grey
+        restartButton.setColorFilter(darkerGrey);
         restartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 newGame(game.getSeed());
             }
         });
+
         // Get the steps text view
         stepsTextView = findViewById(R.id.stepsTextView);
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (sp.contains("state_saved") && !sp.getBoolean("state_finished", false)) {
-            //Restore the previous game
-            restoreGame();
+        View separator = findViewById(R.id.separator);
+        RelativeLayout.LayoutParams slp = new RelativeLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                pixelConverter.dip2px(1)
+        );
+        slp.addRule(RelativeLayout.BELOW, floodView.getId());
+
+        DisplayMetrics matrix = this.getResources().getDisplayMetrics();
+        if (matrix.xdpi <= matrix.ydpi) {
+            View header = findViewById(R.id.header);
+            RelativeLayout.LayoutParams flp = new RelativeLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    pixelConverter.dip2px(373)
+            );
+            flp.addRule(RelativeLayout.BELOW, newGameButton.getId());
+            flp.setMargins(0, pixelConverter.dip2px(25), 0, 0);
+            floodView.setLayoutParams(flp);
+
+            slp.setMargins(0, pixelConverter.dip2px(25), 0, 0);
+            separator.setLayoutParams(slp);
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    pixelConverter.dip2px(1)
+            );
+            lp.addRule(RelativeLayout.BELOW, R.id.appNameTextView);
+            lp.setMargins(0, 8, 0, pixelConverter.dip2px(15));
+            header.setLayoutParams(lp);
         } else {
-            // Set up a new game
-            newGame();
+            slp.setMargins(0, 0, 0, 0);
+            separator.setLayoutParams(slp);
         }
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-
-        if (game.getSteps() != 0 && !gameFinished) {
-            spEditor.putBoolean("state_saved", true);
-            spEditor.putString("state_board", new Gson().toJson(game.getBoard()));
-            spEditor.putInt("state_steps", game.getSteps());
-            spEditor.putString("state_seed", game.getSeed());
-            spEditor.apply();
-        }
-    }
-
-    private void setGameFinished(boolean state) {
-        gameFinished = state;
-        spEditor.putBoolean("state_finished", state);
-        spEditor.apply();
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
     }
 
     private int getBoardSize() {
@@ -172,7 +172,7 @@ public class GameActivity extends AppCompatActivity
         return sp.getInt("num_colors", defaultNumColors);
     }
 
-    private void initPaints() {
+    protected void initPaints() {
         int[] colors;
         if (sp.getBoolean("use_old_colors", false)){
             colors = getResources().getIntArray(R.array.oldBoardColorScheme);
@@ -194,26 +194,22 @@ public class GameActivity extends AppCompatActivity
 
         layoutColorButtons();
 
-        stepsTextView.setText(String.format("%d / %d", game.getSteps(), game.getMaxSteps()));
+        setTextView();
         floodView.setBoardSize(getBoardSize());
         floodView.drawGame(game);
     }
 
-    private void newGame() {
+    protected void newGame() {
         game = new Game(getBoardSize(), getNumColors());
         initGame();
     }
 
-    private void newGame(String seed) {
+    protected void newGame(String seed) {
         game = new Game(getBoardSize(), getNumColors(), seed);
         initGame();
     }
 
-    private void restoreGame() {
-        int board[][] = new Gson().fromJson(sp.getString("state_board", null), int[][].class);
-        int steps = sp.getInt("state_steps", 0);
-        String seed = sp.getString("state_seed", null);
-
+    protected void restoreGame(int[][] board, String seed, int steps) {
         if (board == null || seed == null) {
             newGame();
         } else {
@@ -245,10 +241,10 @@ public class GameActivity extends AppCompatActivity
             newButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    v.startAnimation(AnimationUtils.loadAnimation(GameActivity.this, R.anim.button_anim));
+                    v.startAnimation(AnimationUtils.loadAnimation(AbstractGameActivity.this, R.anim.button_anim));
                     if (localI != lastColor) {
-                            undoList.push(game.getBoard());
-                            doColor(localI);
+                        undoList.push(game.getBoard());
+                        doColor(localI);
                     }
                 }
             });
@@ -258,22 +254,6 @@ public class GameActivity extends AppCompatActivity
             newButton.setColorBlindText(Integer.toString(i + 1));
             newButton.setColor(paints[i].getColor());
             buttonLayout.addView(newButton);
-        }
-    }
-
-    private void doColor(int color) {
-        if (!gameFinished && game.getSteps() <= game.getMaxSteps()) {
-            game.flood(color);
-            floodView.drawGame(game);
-            lastColor = color;
-            stepsTextView.setText(String.format("%d / %d", game.getSteps(), game.getMaxSteps()));
-        }
-
-        if (game.checkWin() || game.getSteps() == game.getMaxSteps()) {
-            setGameFinished(true);
-            showToast();
-
-            new Timer().schedule(new DelayTimer(), 2250);
         }
     }
 
@@ -289,35 +269,30 @@ public class GameActivity extends AppCompatActivity
         ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("seed", game.getSeed());
         clipboard.setPrimaryClip(clip);
-        new Butter(this, R.string.game_seed_copied, Toast.LENGTH_LONG).addJam().show();
+        new Butter(this, R.string.game_seed_copied, Toast.LENGTH_LONG).setFontSize(10).addJam().show();
     }
 
     public void onNewGameFromSeedClick(String seed) {
         newGame(seed);
     }
 
-    public void showToast() {
-        if (game.checkWin()) new Butter(this, R.string.endgame_win_toast)
-                .setFontSize(14).addJam().show();
-        else new Butter(this, R.string.endgame_lose_toast)
-                .setFontSize(14).addJam().show();
-    }
+    protected abstract void restoreGame();
 
-    private void showEndGameDialog() {
-        DialogFragment endGameDialog = new EndGameDialogFragment();
-        Bundle args = new Bundle();
-        args.putInt("steps", game.getSteps());
-        args.putBoolean("game_won", game.checkWin());
-        args.putString("seed", game.getSeed());
-        endGameDialog.setArguments(args);
-        endGameDialog.show(getSupportFragmentManager(), "EndGameDialog");
-    }
+    protected abstract void setGameFinished(boolean state);
 
-    class DelayTimer extends TimerTask {
+    protected abstract void doColor(int color);
+
+    protected abstract void setTextView();
+
+    protected abstract void showToast();
+
+    protected abstract void showEndGameDialog();
+
+    protected class DelayFragmentTimer extends TimerTask {
 
         @Override
         public void run() {
-            GameActivity.this.runOnUiThread(new Runnable() {
+            AbstractGameActivity.this.runOnUiThread(new Runnable() {
 
                 @Override
                 public void run() {

@@ -12,7 +12,7 @@
         android:id="@+id/infoVersionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.FontPath"
+        android:textAppearance="@style/TextAppearance.FontPath.Pierce"
         android:textSize="@dimen/medium_text_size"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/header" />
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/info_license"
-        android:textAppearance="@style/TextAppearance.FontPath"
+        android:textAppearance="@style/TextAppearance.FontPath.Pierce"
         android:textSize="@dimen/small_text_size"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/infoVersionTextView"/>
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:autoLink="web"
         android:text="@string/info_source"
-        android:textAppearance="@style/TextAppearance.FontPath"
+        android:textAppearance="@style/TextAppearance.FontPath.Pierce"
         android:textSize="@dimen/small_text_size"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/infoLicenseTextView"/>
@@ -56,7 +56,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:text="@string/info_instructions_title"
-                android:textAppearance="@style/TextAppearance.FontPath"
+                android:textAppearance="@style/TextAppearance.FontPath.Pierce"
                 android:textSize="@dimen/medium_text_size" />
 
             <TextView
@@ -64,7 +64,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:text="@string/info_instructions"
-                android:textAppearance="@style/TextAppearance.FontPath"
+                android:textAppearance="@style/TextAppearance.FontPath.Pierce"
                 android:textSize="@dimen/small_text_size" />
 
             <TextView
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/info_seeds_title"
-                android:textAppearance="@style/TextAppearance.FontPath"
+                android:textAppearance="@style/TextAppearance.FontPath.Pierce"
                 android:textSize="@dimen/medium_text_size" />
 
             <TextView
@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/info_seeds"
-                android:textAppearance="@style/TextAppearance.FontPath"
+                android:textAppearance="@style/TextAppearance.FontPath.Pierce"
                 android:textSize="@dimen/small_text_size" />
 
             <Button
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/info_back"
-                android:textAppearance="@style/TextAppearance.FontPath"
+                android:textAppearance="@style/TextAppearance.FontPath.Pierce"
                 android:textSize="@dimen/small_text_size" />
 
         </LinearLayout>

@@ -18,7 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.GameActivity"
+        <activity android:name=".activities.RegularGameActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".activities.EndlessGameActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".activities.SettingsActivity"

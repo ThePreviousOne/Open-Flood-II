@@ -9,7 +9,7 @@
     <dimen name="highscore_medal_size">54dp</dimen>
 
     <dimen name="color_button_padding">2dp</dimen>
-    <dimen name="outer_layout_padding">5dp</dimen>
+    <dimen name="outer_layout_padding">5sp</dimen>
     <dimen name="endgame_padding">15dp</dimen>
 
     <dimen name="corners">8dp</dimen>

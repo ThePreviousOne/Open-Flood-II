@@ -6,7 +6,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 
-import com.gunshippenguin.openflood.activities.GameActivity;
+import com.gunshippenguin.openflood.activities.RegularGameActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -27,7 +27,7 @@ import static org.hamcrest.Matchers.allOf;
 public class NewGameTest {
 
     @Rule
-    public ActivityTestRule<GameActivity> mActivityTestRule = new ActivityTestRule<>(GameActivity.class);
+    public ActivityTestRule<RegularGameActivity> mActivityTestRule = new ActivityTestRule<>(RegularGameActivity.class);
 
     @Test
     public void newGameTest() {

@@ -17,4 +17,8 @@
         <item>6</item>
         <item>8</item>
     </integer-array>
+
+    <!-- TODO consider implementing -->
+    <!-- Where to save bundle game -->
+    <bool name="crossSave">true</bool>
 </resources>
