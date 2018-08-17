@@ -127,13 +127,13 @@ abstract class AbstractGameActivity extends AppCompatActivity
             View header = findViewById(R.id.header);
             RelativeLayout.LayoutParams flp = new RelativeLayout.LayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT,
-                    pixelConverter.dip2px(373)
+                    pixelConverter.sip2px(400)
             );
             flp.addRule(RelativeLayout.BELOW, newGameButton.getId());
-            flp.setMargins(0, pixelConverter.dip2px(25), 0, 0);
+            flp.setMargins(0, pixelConverter.dip2px(15), 0, 0);
             floodView.setLayoutParams(flp);
 
-            slp.setMargins(0, pixelConverter.dip2px(25), 0, 0);
+            slp.setMargins(0, pixelConverter.dip2px(15), 0, 0);
             separator.setLayoutParams(slp);
             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,

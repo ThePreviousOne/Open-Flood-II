@@ -14,7 +14,7 @@ public class PixelConverter {
         return (int) (dipValue * context.getResources().getDisplayMetrics().density + 0.5f);
     }
 
-    public int sip2p(float sipValue) {
+    public int sip2px(float sipValue) {
         return (int) (sipValue * context.getResources().getDisplayMetrics().scaledDensity);
 
     }
