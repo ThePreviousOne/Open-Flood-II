@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/outer_layout_padding"
+    android:layout_margin="@dimen/fragment_padding">
+
+    <TextView
+        android:id="@+id/settingsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_settings"
+        android:textSize="@dimen/medium_text_size"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/small_text_size"
+        android:text="@string/settings_board_size"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/settingsTextView" />
+
+    <RadioGroup
+        android:id="@+id/boardSizeRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/textView"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/small_text_size"
+        android:text="@string/settings_num_colors"
+        android:layout_below="@+id/boardSizeRadioGroup"
+        android:layout_alignParentStart="true" />
+
+    <RadioGroup
+        android:id="@+id/numColorsRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:id="@+id/colorBlindCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_color_blind"
+        android:textSize="@dimen/small_text_size"
+        android:layout_below="@+id/numColorsRadioGroup"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:id="@+id/oldColorsCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_old_colors"
+        android:textSize="@dimen/small_text_size"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/colorBlindCheckBox" />
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_below="@+id/oldColorsCheckBox"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="3dp"
+        android:background="@android:color/darker_gray" />
+
+    <Button
+        android:id="@+id/applyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_apply_button"
+        android:textSize="@dimen/small_text_size"
+        android:layout_marginTop="1dp"
+        android:layout_marginStart="30dp"
+        android:layout_below="@+id/separator"
+        android:layout_alignParentStart="true"
+        style="?android:attr/buttonBarButtonStyle" />
+
+    <View
+        android:id="@+id/vSeparator"
+        android:layout_width="1sp"
+        android:layout_height="40dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="15dp"
+        android:layout_below="@+id/separator"
+        android:layout_toStartOf="@+id/clearHighScoresButton" />
+
+    <Button
+        android:id="@+id/clearHighScoresButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_clear_high_scores_button"
+        android:textSize="@dimen/small_text_size"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="20dp"
+        android:layout_below="@+id/separator"
+        android:layout_alignParentEnd="true"
+        style="?android:attr/buttonBarButtonStyle" />
+
+    <RelativeLayout
+        android:id="@+id/drawer"
+        android:layout_below="@+id/vSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/space"
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/highScoresClearText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_clear_high_scores_dialog_text"
+            android:textSize="@dimen/small_text_size"
+            android:layout_below="@+id/space"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/box_margins"
+            android:layout_marginBottom="@dimen/box_margins"/>
+
+        <Button
+            android:id="@+id/confirmHighScoresClearButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_clear_high_scores_dialog_confirm"
+            android:textSize="@dimen/small_text_size"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/highScoresClearText"
+            android:layout_marginStart="@dimen/outer_layout_padding"
+            style="?android:attr/buttonBarButtonStyle" />
+
+        <View
+            android:id="@+id/vSeparator2"
+            android:layout_width="1sp"
+            android:layout_height="32dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="3dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/highScoresClearText"/>
+
+        <Button
+            android:id="@+id/cancelHighScoresClearButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_clear_high_scores_dialog_cancel"
+            android:textSize="@dimen/small_text_size"
+            android:layout_below="@+id/highScoresClearText"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/outer_layout_padding"
+            style="?android:attr/buttonBarButtonStyle" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -9,7 +9,32 @@
     android:padding="@dimen/outer_layout_padding"
     android:layout_marginTop="5sp">
 
-    <include layout="@layout/header_layout" />
+    <com.github.megatronking.svg.support.extend.SVGImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/backButton"/>
+
+    <TextView
+        android:layout_alignParentEnd="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:gravity="end"
+        android:text="@string/app_name"
+        android:id="@+id/appNameTextView"
+        android:textSize="@dimen/large_text_size"
+        android:layout_alignParentRight="true" />
+
+    <View
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/appNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:id="@+id/header"  />
 
     <TextView
         android:id="@+id/stepsTextView"
@@ -20,7 +45,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/header" />
 
-    <ImageButton
+    <com.github.megatronking.svg.support.extend.SVGImageView
         android:id="@+id/newGameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,7 +56,7 @@
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/header" />
 
-    <ImageButton
+    <com.github.megatronking.svg.support.extend.SVGImageView
         android:id="@+id/restartButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,7 +66,7 @@
         android:layout_toStartOf="@id/newGameButton"
         android:layout_below="@+id/header" />
 
-    <ImageButton
+    <com.github.megatronking.svg.support.extend.SVGImageView
         android:id="@+id/undoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,7 +76,7 @@
         android:layout_toStartOf="@id/restartButton"
         android:layout_below="@+id/header" />
 
-    <com.gunshippenguin.openflood.views.FloodView
+    <io.thepreviousone.openfloodii.views.FloodView
         android:id="@+id/floodView"
         android:layout_width="wrap_content"
         android:layout_height="373sp"

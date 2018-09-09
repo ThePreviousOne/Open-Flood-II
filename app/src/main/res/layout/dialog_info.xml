@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/outer_layout_padding" >
+
+    <TextView
+        android:id="@+id/infoVersionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.FontPath.Pierce"
+        android:textSize="@dimen/medium_text_size"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:id="@+id/infoLicenseTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/info_license"
+        android:textAppearance="@style/TextAppearance.FontPath.Pierce"
+        android:textSize="@dimen/small_text_size"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/infoVersionTextView"/>
+
+    <TextView
+        android:id="@+id/infoSourceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoLink="web"
+        android:text="@string/info_source"
+        android:textAppearance="@style/TextAppearance.FontPath.Pierce"
+        android:textSize="@dimen/small_text_size"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/infoLicenseTextView"/>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/box_margins"
+        android:layout_below="@+id/infoSourceTextView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="@string/info_instructions_title"
+                android:textAppearance="@style/TextAppearance.FontPath.Pierce"
+                android:textSize="@dimen/medium_text_size" />
+
+            <TextView
+                android:id="@+id/gameplayDescription"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:text="@string/info_instructions"
+                android:textAppearance="@style/TextAppearance.FontPath.Pierce"
+                android:textSize="@dimen/small_text_size" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/info_seeds_title"
+                android:textAppearance="@style/TextAppearance.FontPath.Pierce"
+                android:textSize="@dimen/medium_text_size" />
+
+            <TextView
+                android:id="@+id/seedDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/info_seeds"
+                android:textAppearance="@style/TextAppearance.FontPath.Pierce"
+                android:textSize="@dimen/small_text_size" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/info_back"
+        android:textAppearance="@style/TextAppearance.FontPath.Pierce"
+        android:textSize="@dimen/small_text_size"
+        android:layout_below="@+id/scrollView"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>
