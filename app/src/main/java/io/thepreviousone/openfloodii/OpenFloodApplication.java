@@ -10,8 +10,6 @@ import io.github.inflationx.viewpump.ViewPump;
 
 public class OpenFloodApplication extends Application {
 
-    public static DisplayMetrics matrics;
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -28,6 +26,5 @@ public class OpenFloodApplication extends Application {
                                 })
                                 .build()))
                 .build());
-        matrics = getApplicationContext().getResources().getDisplayMetrics();
     }
 }

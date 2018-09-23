@@ -17,7 +17,10 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+
 import io.thepreviousone.openfloodii.R;
+import io.thepreviousone.openfloodii.activities.GameActivity;
 import io.thepreviousone.openfloodii.activities.MainActivity;
 import io.thepreviousone.openfloodii.utils.HeightEvaluator;
 import io.thepreviousone.openfloodii.logic.HighScoreManager;
@@ -137,6 +140,7 @@ public class SettingsDialogFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 createAnimator(layout, closedHeight).start();
+
             }
         });
 
@@ -214,10 +218,14 @@ public class SettingsDialogFragment extends DialogFragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        MainActivity mActivity = ((MainActivity) getActivity());
-        mActivity.animationResume();
-        if (settingsChanged) {
-            mActivity.redraw();
+        if (getActivity() instanceof MainActivity) {
+            MainActivity mActivity = ((MainActivity) getActivity());
+            mActivity.animationResume();
+            if (settingsChanged) {
+                mActivity.redraw();
+            }
+        } else if (getActivity() instanceof GameActivity) {
+            EventBus.getDefault().post("");
         }
     }
 }

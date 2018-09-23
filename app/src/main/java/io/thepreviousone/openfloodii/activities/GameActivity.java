@@ -1,24 +1,21 @@
 package io.thepreviousone.openfloodii.activities;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,10 +23,12 @@ import com.github.megatronking.svg.support.SVGDrawable;
 import com.github.megatronking.svg.support.SVGRenderer;
 import com.github.megatronking.svg.support.extend.SVGImageView;
 import com.google.gson.Gson;
+
 import io.thepreviousone.openfloodii.drawables.Back;
 import io.thepreviousone.openfloodii.drawables.Endless;
 import io.thepreviousone.openfloodii.drawables.Regular;
 import io.thepreviousone.openfloodii.fragments.EndGameDialogFragment;
+import io.thepreviousone.openfloodii.fragments.SettingsDialogFragment;
 import io.thepreviousone.openfloodii.views.ColorButton;
 import io.thepreviousone.openfloodii.logic.Game;
 import io.thepreviousone.openfloodii.R;
@@ -37,7 +36,6 @@ import io.thepreviousone.openfloodii.drawables.Replay;
 import io.thepreviousone.openfloodii.drawables.Playoutline;
 import io.thepreviousone.openfloodii.drawables.Undo;
 import io.thepreviousone.openfloodii.utils.JsonStack;
-import io.thepreviousone.openfloodii.utils.PixelConverter;
 import io.thepreviousone.openfloodii.views.Butter;
 import io.thepreviousone.openfloodii.views.FloodView;
 import io.thepreviousone.openfloodii.fragments.SeedDialogFragment;
@@ -48,12 +46,10 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import io.github.inflationx.viewpump.ViewPumpContextWrapper;
-
 /**
  * Activity allowing the user to play the actual game.
  */
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends BaseActivity {
 
     private Game game;
     private JsonStack undoList;
@@ -72,11 +68,7 @@ public class GameActivity extends AppCompatActivity {
     // Paints to be used for the board
     private Paint paints[];
 
-    @Override
-    public void attachBaseContext(Context newBase) {
-        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
-    }
-
+    @SuppressLint("ResourceType")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +81,13 @@ public class GameActivity extends AppCompatActivity {
 
         // Get the FloodView
         floodView = findViewById(R.id.floodView);
+        floodView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                new SettingsDialogFragment().show(getSupportFragmentManager(), "SettingsDialog");
+                return true;
+            }
+        });
 
         // Initialize the paints array and pass it to the FloodView
         initPaints();
@@ -121,6 +120,7 @@ public class GameActivity extends AppCompatActivity {
         newGameButton.setColorFilter(darkerGrey);
         newGameButton.setOnClickListener(new View.OnClickListener() {
             final ObjectAnimator animatorRotation = setRotationAnimation(newGameButton);
+
             @Override
             public void onClick(View v) {
                 animatorRotation.start();
@@ -148,71 +148,34 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        modeSwitchButton = new SVGImageView(this);
-        RelativeLayout.LayoutParams buttonLP = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT
-        );
-        buttonLP.addRule(RelativeLayout.START_OF, R.id.undoButton);
-        buttonLP.addRule(RelativeLayout.ABOVE, R.id.floodView);
-        modeSwitchButton.setLayoutParams(buttonLP);
-
+        modeSwitchButton = findViewById(R.id.modeSwitchButton);
         modeSwitchButton.setImageDrawable(new SVGDrawable(setRenderer()));
         modeSwitchButton.setColorFilter(darkerGrey);
         modeSwitchButton.setOnClickListener(new View.OnClickListener() {
-            final  ObjectAnimator animatorRotation = setRotationAnimation(modeSwitchButton);
+            final ObjectAnimator animatorRotation = setRotationAnimation(modeSwitchButton);
+
             @Override
             public void onClick(View v) {
-                saveGame();
                 animatorRotation.start();
-                new Timer().schedule(new DelayModeSwitchTimer(), 1700);
-                switchGameMode();
+                if (gameMode != 1 && game.getSteps() > game.getMaxSteps()) {
+                    saveGame();
+                    new Timer().schedule(new DelayModeSwitchTimer(), 1700);
+                    switchGameMode();
+                }
             }
         });
-
-        View separator = findViewById(R.id.separator);
-        RelativeLayout.LayoutParams slp = new RelativeLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                PixelConverter.dip2px(1)
-        );
-        slp.addRule(RelativeLayout.BELOW, floodView.getId());
-
-        DisplayMetrics matrix = this.getResources().getDisplayMetrics();
-        if (matrix.xdpi <= matrix.ydpi) {
-            View header = findViewById(R.id.header);
-            RelativeLayout.LayoutParams flp = new RelativeLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    PixelConverter.sip2px(400)
-            );
-            flp.addRule(RelativeLayout.BELOW, newGameButton.getId());
-            flp.setMargins(0, PixelConverter.dip2px(15), 0, 0);
-            floodView.setLayoutParams(flp);
-
-            slp.setMargins(0, PixelConverter.dip2px(15), 0, 0);
-            separator.setLayoutParams(slp);
-            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    PixelConverter.dip2px(1)
-            );
-            lp.addRule(RelativeLayout.BELOW, R.id.appNameTextView);
-            lp.setMargins(0, 8, 0, PixelConverter.dip2px(15));
-            header.setLayoutParams(lp);
-        } else {
-            slp.setMargins(0, 0, 0, 0);
-            separator.setLayoutParams(slp);
-        }
         stepsTextView = findViewById(R.id.stepsTextView);
-        RelativeLayout layout = findViewById(R.id.relativeLayout);
-        layout.addView(modeSwitchButton);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         EventBus.getDefault().register(this);
-        if (sp.contains("state_saved")) {
-            if (!sp.getBoolean("state_finished0", false) && gameMode == 0) restoreGame();
-            else if (!sp.getBoolean("state_finished1", false) && gameMode == 1) restoreGame();
+        if (sp.contains("sp_gameMode")) {
+            gameMode = sp.getInt("sp_gameMode", gameMode);
+        }
+        if (sp.contains("state_saved" + gameMode)) {
+            if (!sp.getBoolean("state_finished" + gameMode, false)) restoreGame();
         }
         else newGame();
     }
@@ -220,13 +183,20 @@ public class GameActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-        if (game.getSteps() != 0 && !gameFinished) saveGame();
+        if (!gameFinished) saveGame();
         EventBus.getDefault().unregister(this);
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        spEditor.remove("sp_gameMode");
+        spEditor.apply();
+    }
+
+    @Override
     public void onBackPressed() {
-        finish();
+        startActivity(new Intent(GameActivity.this, MainActivity.class));
         super.onBackPressed();
     }
 
@@ -240,7 +210,7 @@ public class GameActivity extends AppCompatActivity {
 
     @Subscribe
     public void onEvent(String seed) {
-        if (seed == null) {
+        if (seed.equals("")) {
             newGame();
         } else {
             newGame(seed);
@@ -337,7 +307,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void restoreGame() {
         int board[][] = new Gson().fromJson(sp.getString("state_board" + gameMode, null), int[][].class);
-        if (getBoardSize() == board.length && sp.getInt("state_colors",
+        if (getBoardSize() == board.length && sp.getInt("sp_colors",
                     getResources().getInteger(R.integer.default_num_colors)) == getNumColors()) {
             int steps = sp.getInt("state_steps" + gameMode, 0);
             String seed = sp.getString("state_seed" + gameMode, null);
@@ -348,7 +318,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void saveGame() {
-        spEditor.putInt("state_colors", getNumColors());
+        spEditor.putInt("sp_colors", getNumColors());
+        spEditor.putInt("sp_gameMode", gameMode);
         spEditor.putBoolean("state_saved" + gameMode, true);
         spEditor.putString("state_board" + gameMode, new Gson().toJson(game.getBoard()));
         spEditor.putInt("state_steps" + gameMode, game.getSteps());

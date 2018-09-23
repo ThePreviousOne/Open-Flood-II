@@ -4,12 +4,10 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
@@ -23,31 +21,24 @@ import io.thepreviousone.openfloodii.utils.PixelConverter;
 import io.thepreviousone.openfloodii.fragments.InfoDialogFragment;
 import io.thepreviousone.openfloodii.views.OtherFloodView;
 import io.thepreviousone.openfloodii.fragments.SettingsDialogFragment;
-import io.thepreviousone.openfloodii.views.SVGImageViewK;
+import io.thepreviousone.openfloodii.views.SVGImageViewS;
 
-import io.github.inflationx.viewpump.ViewPumpContextWrapper;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private OtherFloodView background;
     private ObjectAnimator animatorRotation, animatorScale;
     private int darkerGrey = 0xEE272727;
 
     @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
-    }
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         final FrameLayout outline = findViewById(R.id.outline);
         final View space = findViewById(R.id.space);
         final RelativeLayout frame = findViewById(R.id.mainLayout);
-        final SVGImageViewK play = findViewById(R.id.regularPlayButton);
-        final SVGImageViewK endless = findViewById(R.id.endlessPlayButton);
+        final SVGImageViewS play = findViewById(R.id.regularPlayButton);
+        final SVGImageViewS endless = findViewById(R.id.endlessPlayButton);
         final ImageView settings = findViewById(R.id.settingsButton);
         final ImageView info = findViewById(R.id.infoButton);
         background = new OtherFloodView(this);
@@ -101,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         frame.addView(endless);
     }
 
-    private void setupButton(SVGImageViewK view, final int mode) {
+    private void setupButton(SVGImageViewS view, final int mode) {
         view.setColorFilter(darkerGrey);
         view.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         view.setOnClickListener(new View.OnClickListener() {
@@ -115,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setScaleAnimator(final SVGImageViewK view) {
+    private void setScaleAnimator(final SVGImageViewS view) {
         animatorScale = ObjectAnimator.ofInt(view, "svgScale",
                 PixelConverter.dip2px(136), PixelConverter.dip2px(128));
         animatorScale.setDuration(1750);
@@ -147,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setRotationAnimator(final SVGImageViewK view) {
+    private void setRotationAnimator(final SVGImageViewS view) {
         animatorRotation = ObjectAnimator.ofFloat(view, "svgRotation", 0, 360);
         animatorRotation.setDuration(3500);
         animatorRotation.setInterpolator(new AccelerateDecelerateInterpolator());

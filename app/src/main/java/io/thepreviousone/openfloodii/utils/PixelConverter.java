@@ -1,15 +1,19 @@
 package io.thepreviousone.openfloodii.utils;
 
-import io.thepreviousone.openfloodii.OpenFloodApplication;
+import static io.thepreviousone.openfloodii.activities.BaseActivity.metrics;
+import static io.thepreviousone.openfloodii.activities.BaseActivity.screenWidth;
 
 public class PixelConverter {
 
     public static int dip2px(float dipValue) {
-        return (int) (dipValue * OpenFloodApplication.matrics.density + 0.5f);
+        if (screenWidth >= 3.5f) {
+            return (int)  (dipValue * metrics.density * 1.5f);
+        }
+        return (int) (dipValue * metrics.density + 0.5f);
     }
 
     public static int sip2px(float sipValue) {
-        return (int) (sipValue * OpenFloodApplication.matrics.scaledDensity);
+        return (int) (sipValue * metrics.scaledDensity);
 
     }
 }

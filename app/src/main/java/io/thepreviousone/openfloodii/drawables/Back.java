@@ -4,23 +4,24 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
-import android.graphics.RectF;
 
 import com.github.megatronking.svg.support.SVGRenderer;
+
+import io.thepreviousone.openfloodii.utils.PixelConverter;
 
 public class Back extends SVGRenderer {
 
     public Back(Context context) {
         super(context);
         mAlpha = 1.0f;
-        mWidth = dip2px(48.0f);
-        mHeight = dip2px(48.0f);
+        mWidth = PixelConverter.dip2px(32.0f);
+        mHeight = PixelConverter.dip2px(32.0f);
     }
 
     @Override
     public void render(Canvas canvas, int w, int h, ColorFilter filter) {
-        final float scaleX = w / 24.0f;
-        final float scaleY = h / 24.0f;
+        final float scaleX = w / 18.0f;
+        final float scaleY = h / 18.0f;
 
         mPath.reset();
         mRenderPath.reset();

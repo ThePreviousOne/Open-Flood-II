@@ -5,12 +5,13 @@ import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.preference.PreferenceManager;
-import android.util.DisplayMetrics;
 import android.view.View;
 
 import io.thepreviousone.openfloodii.R;
 
 import java.util.Random;
+
+import static io.thepreviousone.openfloodii.activities.BaseActivity.metrics;
 
 public class OtherFloodView extends View {
 
@@ -68,9 +69,8 @@ public class OtherFloodView extends View {
 
     private void setDrawingInfo() {
         int dimension;
-        final DisplayMetrics display = getContext().getResources().getDisplayMetrics();
-        final int pixelsX = display.widthPixels;
-        final int pixelsY = display.heightPixels;
+        final int pixelsX = metrics.widthPixels;
+        final int pixelsY = metrics.heightPixels;
         if (pixelsX > pixelsY) {
             dimension = pixelsY;
         } else {
@@ -78,7 +78,7 @@ public class OtherFloodView extends View {
         }
         dimension -= (dimension % boardSizeX);
         cellSize = dimension / boardSizeX;
-        boardSizeY = (int) Math.floor(pixelsY / cellSize);
+        boardSizeY = (pixelsY / cellSize);
     }
 
     @Override

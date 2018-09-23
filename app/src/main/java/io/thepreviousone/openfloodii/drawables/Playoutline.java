@@ -8,13 +8,15 @@ import android.graphics.Path;
 
 import com.github.megatronking.svg.support.SVGRenderer;
 
+import io.thepreviousone.openfloodii.utils.PixelConverter;
+
 public class Playoutline extends SVGRenderer {
 
     public Playoutline(Context context, float size) {
         super(context);
         mAlpha = 1.0f;
-        mWidth = dip2px(size);
-        mHeight = dip2px(size);
+        mWidth = PixelConverter.dip2px(size);
+        mHeight = PixelConverter.dip2px(size);
     }
 
     @Override

@@ -8,6 +8,8 @@ import android.graphics.Path;
 
 import com.github.megatronking.svg.support.SVGRenderer;
 
+import io.thepreviousone.openfloodii.utils.PixelConverter;
+
 /**
  * AUTO-GENERATED FILE.  DO NOT MODIFY.
  * 
@@ -19,8 +21,8 @@ public class Highscore extends SVGRenderer {
     public Highscore(Context context) {
         super(context);
         mAlpha = 1.0f;
-        mWidth = dip2px(64.0f);
-        mHeight = dip2px(64.0f);
+        mWidth = PixelConverter.dip2px(64.0f);
+        mHeight = PixelConverter.dip2px(64.0f);
     }
 
     @Override

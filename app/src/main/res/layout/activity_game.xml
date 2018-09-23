@@ -1,40 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:layout_marginTop="5sp"
     android:keepScreenOn="true"
-    android:padding="@dimen/outer_layout_padding"
-    android:layout_marginTop="5sp">
+    android:padding="@dimen/outer_layout_padding">
 
     <com.github.megatronking.svg.support.extend.SVGImageView
+        android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:id="@+id/backButton"/>
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_alignParentEnd="true"
+        android:id="@+id/appNameTextView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
         android:gravity="end"
         android:text="@string/app_name"
-        android:id="@+id/appNameTextView"
         android:textSize="@dimen/large_text_size"
-        android:layout_alignParentRight="true" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <View
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="10dp"
-        android:layout_below="@+id/appNameTextView"
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginTop="6dp"
         android:background="@android:color/darker_gray"
-        android:id="@+id/header"  />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appNameTextView"
+        app:layout_constraintBottom_toTopOf="@+id/stepsTextView" />
 
     <TextView
         android:id="@+id/stepsTextView"
@@ -42,62 +45,87 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/outer_layout_padding"
         android:textSize="@dimen/large_text_size"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/header" />
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/floodView"/>
 
     <com.github.megatronking.svg.support.extend.SVGImageView
         android:id="@+id/newGameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/outer_layout_padding"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@null"
         android:scaleType="centerCrop"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/header" />
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/floodView" />
 
     <com.github.megatronking.svg.support.extend.SVGImageView
         android:id="@+id/restartButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@null"
         android:scaleType="centerCrop"
-        android:layout_toStartOf="@id/newGameButton"
-        android:layout_below="@+id/header" />
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        app:layout_constraintEnd_toStartOf="@id/newGameButton"
+        app:layout_constraintBottom_toTopOf="@+id/floodView" />
 
     <com.github.megatronking.svg.support.extend.SVGImageView
         android:id="@+id/undoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@null"
         android:scaleType="centerCrop"
-        android:layout_toStartOf="@id/restartButton"
-        android:layout_below="@+id/header" />
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        app:layout_constraintEnd_toStartOf="@id/restartButton"
+        app:layout_constraintBottom_toTopOf="@+id/floodView"/>
+
+    <com.github.megatronking.svg.support.extend.SVGImageView
+        android:id="@+id/modeSwitchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        app:layout_constraintEnd_toStartOf="@id/undoButton"
+        app:layout_constraintBottom_toTopOf="@+id/floodView"/>
 
     <io.thepreviousone.openfloodii.views.FloodView
         android:id="@+id/floodView"
         android:layout_width="wrap_content"
-        android:layout_height="373sp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/undoButton" />
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modeSwitchButton"
+        app:layout_constraintBottom_toTopOf="@+id/separator"/>
 
     <View
         android:id="@+id/separator"
         android:layout_width="wrap_content"
         android:layout_height="1sp"
+        android:layout_marginBottom="15dp"
         android:background="@android:color/darker_gray"
-        android:layout_below="@+id/floodView"/>
+        app:layout_constraintTop_toBottomOf="@id/floodView"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLayout"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <LinearLayout
         android:id="@+id/buttonLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0sp"
-        android:layout_marginTop="10sp"
-        android:layout_marginBottom="@dimen/outer_layout_padding"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
         android:orientation="horizontal"
-        android:layout_below="@id/separator"
-        android:layout_alignParentBottom="true"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/separator" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

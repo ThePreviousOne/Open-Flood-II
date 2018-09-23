@@ -109,7 +109,7 @@ public class EndGameDialogFragment extends DialogFragment {
         newGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventBus.getDefault().post(null);
+                EventBus.getDefault().post("");
                 dismiss();
             }
         });

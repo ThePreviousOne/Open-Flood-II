@@ -12,6 +12,8 @@ import android.view.View;
 
 import io.thepreviousone.openfloodii.logic.Game;
 
+import static io.thepreviousone.openfloodii.activities.BaseActivity.metrics;
+
 /**
  * View that displays the game board to the user.
  */
