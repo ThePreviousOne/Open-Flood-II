@@ -2,7 +2,7 @@
   <img src="branding/Screenshot_Open_Flood_2.png" height="400">
 </p>
 
-<h1 align="center">Open Flood2</h1>
+<h1 align="center">Open Flood II</h1>
 
 ## Gameplay
 
