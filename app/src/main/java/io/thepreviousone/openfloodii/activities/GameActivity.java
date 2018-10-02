@@ -119,7 +119,7 @@ public class GameActivity extends BaseActivity {
         newGameButton.setImageDrawable(new SVGDrawable(new Playoutline(this, 48f)));
         newGameButton.setColorFilter(darkerGrey);
         newGameButton.setOnClickListener(new View.OnClickListener() {
-            final ObjectAnimator animatorRotation = setRotationAnimation(newGameButton);
+        final ObjectAnimator animatorRotation = setRotationAnimation(newGameButton);
 
             @Override
             public void onClick(View v) {
@@ -157,11 +157,9 @@ public class GameActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 animatorRotation.start();
-                if (gameMode != 1 && game.getSteps() > game.getMaxSteps()) {
-                    saveGame();
-                    new Timer().schedule(new DelayModeSwitchTimer(), 1700);
-                    switchGameMode();
-                }
+                saveGame();
+                new Timer().schedule(new DelayModeSwitchTimer(), 1700);
+                switchGameMode();
             }
         });
         stepsTextView = findViewById(R.id.stepsTextView);
