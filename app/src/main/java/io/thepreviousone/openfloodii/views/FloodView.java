@@ -81,16 +81,12 @@ public class FloodView extends View {
 
             // Draw numbers if color blind mode is on
             if (PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("color_blind_mode", false)) {
-                String numToDraw;
-                Rect currRect = new Rect();
                 for (int y = 0; y < gameToDraw.getBoardDimensions(); y++) {
                     for (int x = 0; x < gameToDraw.getBoardDimensions(); x++) {
-                        currRect.set(x * cellSize + xOffset, y * cellSize + yOffset,
-                                (x + 1) * cellSize + xOffset, (y + 1) * cellSize + yOffset);
-                        numToDraw = Integer.toString(gameToDraw.getColor(x, y) + 1);
-                        c.drawText(numToDraw, currRect.centerX(),
-                                (int) (currRect.centerY() - ((textPaint.descent() + textPaint.ascent()) / 2)),
-                                textPaint);
+                        c.drawText(Integer.toString(gameToDraw.getColor(x, y) + 1),
+                                (x * cellSize + xOffset) + (cellSize / 2),
+                                (y * cellSize + yOffset) + cellSize - 10, textPaint
+                        );
                     }
                 }
             }
