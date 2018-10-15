@@ -5,8 +5,10 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -27,7 +29,6 @@ public class MainActivity extends BaseActivity {
 
     private OtherFloodView background;
     private ObjectAnimator animatorRotation, animatorScale;
-    private int darkerGrey = 0xEE272727;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -98,9 +99,11 @@ public class MainActivity extends BaseActivity {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit();
+                editor.putInt("sp_gameMode", mode);
+                editor.apply();
                 finish();
                 Intent launchPlayIntent = new Intent(MainActivity.this, GameActivity.class);
-                launchPlayIntent.putExtra("gameMode", mode);
                 startActivity(launchPlayIntent);
             }
         });

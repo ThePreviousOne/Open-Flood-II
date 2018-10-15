@@ -13,6 +13,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public static DisplayMetrics metrics = new DisplayMetrics();
     public static float screenWidth;
+    protected int darkerGrey = 0xFF272727;
 
 
     @Override

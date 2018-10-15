@@ -58,11 +58,13 @@ public class GameActivity extends BaseActivity {
 
     private FloodView floodView;
     private TextView stepsTextView;
+    //Button for switching GameModes
     private SVGImageView modeSwitchButton;
 
     private int lastColor;
 
     private boolean gameFinished;
+    //0 == regular; 1 == endless
     private int gameMode;
 
     // Paints to be used for the board
@@ -76,8 +78,8 @@ public class GameActivity extends BaseActivity {
 
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         spEditor = sp.edit();
-        gameMode = getIntent().getIntExtra("gameMode", 0);
-        final int darkerGrey = 0xFF272727;
+        gameMode = sp.getInt("sp_gameMode", gameMode);
+        final int darkerGrey = 0xEE272727;
 
         // Get the FloodView
         floodView = findViewById(R.id.floodView);
@@ -93,6 +95,7 @@ public class GameActivity extends BaseActivity {
         initPaints();
         floodView.setPaints(paints);
 
+        //Back to Main Menu (MainActivity)
         final ImageView backButton = findViewById(R.id.backButton);
         backButton.setImageDrawable(new SVGDrawable(new Back(this)));
         backButton.setColorFilter(0xFF666666);
@@ -169,9 +172,6 @@ public class GameActivity extends BaseActivity {
     public void onResume() {
         super.onResume();
         EventBus.getDefault().register(this);
-        if (sp.contains("sp_gameMode")) {
-            gameMode = sp.getInt("sp_gameMode", gameMode);
-        }
         if (sp.contains("state_saved" + gameMode)) {
             if (!sp.getBoolean("state_finished" + gameMode, false)) restoreGame();
         }
@@ -188,7 +188,6 @@ public class GameActivity extends BaseActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        spEditor.remove("sp_gameMode");
         spEditor.apply();
     }
 
