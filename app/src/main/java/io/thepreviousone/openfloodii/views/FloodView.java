@@ -4,15 +4,13 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import io.thepreviousone.openfloodii.logic.Game;
+import androidx.annotation.Nullable;
 
-import static io.thepreviousone.openfloodii.activities.BaseActivity.metrics;
+import io.thepreviousone.openfloodii.logic.Game;
 
 /**
  * View that displays the game board to the user.
@@ -22,7 +20,6 @@ public class FloodView extends View {
     private int boardSize;
     private int cellSize;
     private int xOffset;
-    private int yOffset;
     private Paint textPaint;
     private Paint paints[];
 
@@ -50,7 +47,6 @@ public class FloodView extends View {
         dimension -= (dimension % boardSize);
         cellSize = dimension / boardSize;
         xOffset = (getWidth() - dimension) / 2 ;
-        yOffset = (getHeight() - dimension) / 2 ;
         textPaint.setTextSize(cellSize); }
 
     public void setBoardSize(int boardSize) {
@@ -74,8 +70,8 @@ public class FloodView extends View {
             // Draw colors
             for (int y = 0; y < gameToDraw.getBoardDimensions(); y++) {
                 for (int x = 0; x < gameToDraw.getBoardDimensions(); x++) {
-                    c.drawRect(x * cellSize + xOffset, y * cellSize + yOffset,
-                            (x + 1) * cellSize + xOffset, (y + 1) * cellSize + yOffset, paints[gameToDraw.getColor(x, y)]);
+                    c.drawRect(x * cellSize + xOffset, y * cellSize,
+                            (x + 1) * cellSize + xOffset, (y + 1) * cellSize, paints[gameToDraw.getColor(x, y)]);
                 }
             }
 
@@ -85,7 +81,7 @@ public class FloodView extends View {
                     for (int x = 0; x < gameToDraw.getBoardDimensions(); x++) {
                         c.drawText(Integer.toString(gameToDraw.getColor(x, y) + 1),
                                 (x * cellSize + xOffset) + (cellSize / 2),
-                                (y * cellSize + yOffset) + cellSize - 10, textPaint
+                                (y * cellSize) + (cellSize * 0.85f), textPaint
                         );
                     }
                 }

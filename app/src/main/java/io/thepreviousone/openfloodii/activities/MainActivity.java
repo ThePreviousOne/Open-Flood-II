@@ -6,17 +6,18 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.Nullable;
+
 import com.github.megatronking.svg.support.SVGDrawable;
+
 import io.thepreviousone.openfloodii.R;
 import io.thepreviousone.openfloodii.drawables.*;
 import io.thepreviousone.openfloodii.utils.PixelConverter;
@@ -123,21 +124,19 @@ public class MainActivity extends BaseActivity {
                 view.requestLayout();
             }
         });
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            view.animate().setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationPause(Animator animation) {
-                    super.onAnimationPause(animation);
-                    view.setLayerType(View.LAYER_TYPE_NONE, null);
-                }
+        view.animate().setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationPause(Animator animation) {
+                super.onAnimationPause(animation);
+                view.setLayerType(View.LAYER_TYPE_NONE, null);
+            }
 
-                @Override
-                public void onAnimationResume(Animator animation) {
-                    super.onAnimationResume(animation);
-                    view.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-                }
-            });
-        }
+            @Override
+            public void onAnimationResume(Animator animation) {
+                super.onAnimationResume(animation);
+                view.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+            }
+        });
 
     }
 
@@ -147,46 +146,33 @@ public class MainActivity extends BaseActivity {
         animatorRotation.setInterpolator(new AccelerateDecelerateInterpolator());
         animatorRotation.setRepeatCount(ValueAnimator.INFINITE);
         animatorRotation.start();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            view.animate().setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationPause(Animator animation) {
-                    super.onAnimationPause(animation);
-                    view.setLayerType(View.LAYER_TYPE_NONE, null);
-                }
+        view.animate().setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationPause(Animator animation) {
+                super.onAnimationPause(animation);
+                view.setLayerType(View.LAYER_TYPE_NONE, null);
+            }
 
-                @Override
-                public void onAnimationResume(Animator animation) {
-                    super.onAnimationResume(animation);
-                    view.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-                }
-            });
-        }
+            @Override
+            public void onAnimationResume(Animator animation) {
+                super.onAnimationResume(animation);
+                view.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+            }
+        });
     }
 
     private void animationPause() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            animatorRotation.pause();
-            animatorScale.pause();
-        } else {
-            animatorRotation.end();
-            animatorScale.end();
-        }
+        animatorRotation.pause();
+        animatorScale.pause();
     }
 
     public void animationResume() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            animatorRotation.resume();
-            animatorScale.resume();
-        } else {
-            animatorRotation.start();
-            animatorScale.start();
-        }
+        animatorRotation.resume();
+        animatorScale.resume();
     }
 
     public void redraw() {
         background.invalidate();
         background.initBoard();
     }
-
 }

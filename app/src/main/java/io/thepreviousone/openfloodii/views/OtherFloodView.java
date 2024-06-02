@@ -84,7 +84,7 @@ public class OtherFloodView extends View {
     @Override
     protected void onDraw(Canvas c) {
         // Draw colors
-        for (int y = 0; y < boardSizeY ; y++) {
+        for (int y = 0; y < boardSizeY; y++) {
             for (int x = 0; x < boardSizeX; x++) {
                 c.drawRect(x * cellSize, y * cellSize,
                         (x + 1) * cellSize, (y + 1) * cellSize, paints[board[y][x]]);

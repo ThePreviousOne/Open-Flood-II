@@ -5,8 +5,6 @@ import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -17,7 +15,12 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.Objects;
 
 import io.thepreviousone.openfloodii.R;
 import io.thepreviousone.openfloodii.activities.GameActivity;
@@ -42,8 +45,8 @@ public class SettingsDialogFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         final int closedHeight = PixelConverter.dip2px(290);
-        final View layout = getActivity().getLayoutInflater().inflate(R.layout.dialog_settings, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        final View layout = requireActivity().getLayoutInflater().inflate(R.layout.dialog_settings, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(layout);
         final AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(true);
@@ -131,7 +134,7 @@ public class SettingsDialogFragment extends DialogFragment {
                 dismiss();
 
                 new Butter(getContext(), R.string.settings_clear_high_scores_toast, Toast.LENGTH_LONG)
-                        .setFont("fonts/Lenka.ttf").setBackgroundColor(0xFFFFFAF6).addJam().show();
+                        .setFont(R.font.lenka).setBackgroundColor(0xFFFFFAF6).addJam().show();
             }
         });
 

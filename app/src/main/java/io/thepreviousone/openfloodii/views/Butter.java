@@ -6,15 +6,18 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 
-import android.support.annotation.StringRes;
 import android.view.Gravity;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import io.thepreviousone.openfloodii.R;
 import io.thepreviousone.openfloodii.utils.PixelConverter;
 
 import static android.view.ViewGroup.LayoutParams;
 import static android.view.ViewGroup.LayoutParams.*;
+
+import androidx.annotation.StringRes;
+import androidx.core.content.res.ResourcesCompat;
 
 /**
  * Make Toast (new Butter)
@@ -45,8 +48,8 @@ public class Butter extends Toast {
         this.color = 0x77FFFAF6;
     }
 
-    public Butter setFont(String font) {
-        this.font = Typeface.createFromAsset(context.getAssets(), font);
+    public Butter setFont(int font) {
+        this.font = ResourcesCompat.getFont(context, font);
         return this;
     }
 
@@ -77,7 +80,7 @@ public class Butter extends Toast {
         background.getPaint().setColor(color);
         background.getPaint().setStyle(Paint.Style.FILL);
         //rl.setLayoutParams(lp);
-        if (font == null) font = Typeface.createFromAsset(context.getAssets(), "fonts/Yahfie-Heavy.ttf");
+        if (font == null) font = ResourcesCompat.getFont(context, R.font.yahfieheavy);
         textView.setTypeface(font);
         textView.setTextSize(textSize);
         textView.setBackground(background);

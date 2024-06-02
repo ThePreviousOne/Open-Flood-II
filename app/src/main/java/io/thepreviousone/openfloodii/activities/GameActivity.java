@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -19,10 +18,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.DialogFragment;
+
 import com.github.megatronking.svg.support.SVGDrawable;
 import com.github.megatronking.svg.support.SVGRenderer;
 import com.github.megatronking.svg.support.extend.SVGImageView;
 import com.google.gson.Gson;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import io.thepreviousone.openfloodii.drawables.Back;
 import io.thepreviousone.openfloodii.drawables.Endless;
@@ -39,9 +43,6 @@ import io.thepreviousone.openfloodii.utils.JsonStack;
 import io.thepreviousone.openfloodii.views.Butter;
 import io.thepreviousone.openfloodii.views.FloodView;
 import io.thepreviousone.openfloodii.fragments.SeedDialogFragment;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -68,7 +69,7 @@ public class GameActivity extends BaseActivity {
     private int gameMode;
 
     // Paints to be used for the board
-    private Paint paints[];
+    private Paint[] paints;
 
     @SuppressLint("ResourceType")
     @Override
@@ -207,7 +208,7 @@ public class GameActivity extends BaseActivity {
 
     @Subscribe
     public void onEvent(String seed) {
-        if (seed.equals("")) {
+        if (seed.isEmpty()) {
             newGame();
         } else {
             newGame(seed);
@@ -303,7 +304,7 @@ public class GameActivity extends BaseActivity {
     }
 
     private void restoreGame() {
-        int board[][] = new Gson().fromJson(sp.getString("state_board" + gameMode, null), int[][].class);
+        int[][] board = new Gson().fromJson(sp.getString("state_board" + gameMode, null), int[][].class);
         if (getBoardSize() == board.length && sp.getInt("sp_colors",
                     getResources().getInteger(R.integer.default_num_colors)) == getNumColors()) {
             int steps = sp.getInt("state_steps" + gameMode, 0);
@@ -389,7 +390,7 @@ public class GameActivity extends BaseActivity {
             doStep(color);
         } else {
             new Butter(this, R.string.undo_toast)
-                    .setFont("fonts/Lenka.ttf").addJam().show();
+                    .setFont(R.font.lenka).addJam().show();
         }
     }
 

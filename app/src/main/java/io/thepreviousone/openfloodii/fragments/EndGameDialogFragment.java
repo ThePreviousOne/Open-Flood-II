@@ -5,9 +5,6 @@ import android.content.ClipData;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -16,12 +13,17 @@ import android.widget.TextView;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+
 import com.github.megatronking.svg.support.SVGDrawable;
+
+import org.greenrobot.eventbus.EventBus;
+
 import io.thepreviousone.openfloodii.logic.HighScoreManager;
 import io.thepreviousone.openfloodii.R;
 import io.thepreviousone.openfloodii.drawables.Highscore;
-
-import org.greenrobot.eventbus.EventBus;
 
 /**
  * Dialog Fragment that is displayed to the user upon a win or loss.
