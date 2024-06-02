@@ -18,11 +18,6 @@ import androidx.fragment.app.DialogFragment;
 
 import io.thepreviousone.openfloodii.R;
 
-import org.greenrobot.eventbus.EventBus;
-
-import java.util.Objects;
-
-import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 import io.thepreviousone.openfloodii.activities.MainActivity;
 
 /**

@@ -8,19 +8,11 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import io.github.inflationx.viewpump.ViewPumpContextWrapper;
-
 public abstract class BaseActivity extends AppCompatActivity {
 
     public static DisplayMetrics metrics = new DisplayMetrics();
     public static float screenWidth;
     protected int darkerGrey = 0xFF272727;
-
-
-    @Override
-    public void attachBaseContext(Context newBase) {
-        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

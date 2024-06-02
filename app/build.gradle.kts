@@ -11,11 +11,11 @@ android {
         minSdk = 22
         targetSdk = 34
         versionCode = 17
-        versionName = "2.1.0"
+        versionName = "2.1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
-            useSupportLibrary = true
+            useSupportLibrary = false
         }
     }
 
@@ -38,12 +38,12 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
 
     implementation(libs.gson)
-    implementation(libs.viewpump)
     implementation(libs.eventbus)
     implementation(project(":svg-support"))
 
     testImplementation(libs.junit)
 
+    implementation(platform(libs.kotlin.bom))
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
