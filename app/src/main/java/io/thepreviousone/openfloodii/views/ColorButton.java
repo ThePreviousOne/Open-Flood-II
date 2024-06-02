@@ -7,8 +7,9 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
+
+import androidx.core.content.ContextCompat;
 
 import io.thepreviousone.openfloodii.R;
 

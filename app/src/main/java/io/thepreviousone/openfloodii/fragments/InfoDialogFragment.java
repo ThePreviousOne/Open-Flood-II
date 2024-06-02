@@ -1,21 +1,26 @@
 package io.thepreviousone.openfloodii.fragments;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+
 import io.thepreviousone.openfloodii.R;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.Objects;
 
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 import io.thepreviousone.openfloodii.activities.MainActivity;
@@ -25,11 +30,12 @@ import io.thepreviousone.openfloodii.activities.MainActivity;
  */
 public class InfoDialogFragment extends DialogFragment {
 
+    @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LayoutInflater inflater = getActivity().getLayoutInflater();
+        LayoutInflater inflater = requireActivity().getLayoutInflater();
         View layout = inflater.inflate(R.layout.dialog_info, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(layout);
@@ -42,8 +48,8 @@ public class InfoDialogFragment extends DialogFragment {
 
         PackageInfo pInfo;
         try {
-            pInfo = getContext().getPackageManager().getPackageInfo(getContext().getPackageName(), 0);
-            versionTextView.setText(String.format("%s %s", appName, pInfo.versionName));
+            pInfo = requireContext().getPackageManager().getPackageInfo(requireContext().getPackageName(), 0);
+            versionTextView.setText(String.format(pInfo.versionName));
         } catch (PackageManager.NameNotFoundException e) {
             versionTextView.setText(appName);
         }
@@ -67,6 +73,6 @@ public class InfoDialogFragment extends DialogFragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        ((MainActivity) getActivity()).animationResume();
+        ((MainActivity) requireActivity()).animationResume();
     }
 }

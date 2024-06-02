@@ -53,7 +53,7 @@
         android:textSize="@dimen/small_text_size" />
 
     <TextView
-        android:textAppearance="@style/TextAppearance.FontPath.Pierce"
+        android:fontFamily="@font/pierceroman"
         android:id="@+id/seedTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

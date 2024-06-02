@@ -18,9 +18,10 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.support.v7.widget.AppCompatImageView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.github.megatronking.svg.support.R;
 import com.github.megatronking.svg.support.SVGDrawable;
@@ -140,11 +141,11 @@ public class SVGImageViewS extends AppCompatImageView {
     }
 
     private void resetDrawable(Drawable drawable) {
-        if (drawable != null && drawable instanceof SVGDrawable) {
+        if (drawable instanceof SVGDrawable) {
             drawable.mutate();
-            ((SVGDrawable)drawable).setTintList(mSvgColor);
+            drawable.setTintList(mSvgColor);
             if (mSvgAlpha > 0 && mSvgAlpha <= 1.0f) {
-                ((SVGDrawable)drawable).setAlpha((int) (mSvgAlpha * 0xFF));
+                drawable.setAlpha((int) (mSvgAlpha * 0xFF));
             }
             if (mSvgWidth > 0) {
                 ((SVGDrawable)drawable).setWidth(mSvgWidth);
